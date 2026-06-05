@@ -148,6 +148,12 @@ const hasSlides = slides.length > 0;
     const slider = document.getElementById('hero-slider');
     if (!slider) return;
 
+    // Prevent double initialization
+    if (slider.dataset.initialized) return;
+    slider.dataset.initialized = 'true';
+
+    console.log("Slider initialized");
+
     const slides = slider.querySelectorAll('.hero-slide');
     const dots = slider.querySelectorAll('.hero-dot');
     const prevBtn = document.getElementById('hero-prev');
@@ -157,10 +163,10 @@ const hasSlides = slides.length > 0;
 
     let currentIndex = 0;
     const totalSlides = slides.length;
-    let autoplayInterval: number;
-    const intervalTime = 5000;
+    let autoplayInterval;
+    const intervalTime = 4000;
 
-    const updateSlider = (newIndex: number) => {
+    const updateSlider = (newIndex) => {
       // Hide current
       slides[currentIndex].classList.remove('opacity-100');
       slides[currentIndex].classList.add('opacity-0');
@@ -177,6 +183,8 @@ const hasSlides = slides.length > 0;
         dots[currentIndex].classList.remove('bg-white/40');
         dots[currentIndex].classList.add('bg-white', 'scale-125');
       }
+      
+      console.log("Slide changed:", currentIndex);
     };
 
     const nextSlide = () => {
@@ -195,7 +203,10 @@ const hasSlides = slides.length > 0;
     };
 
     const stopAutoplay = () => {
-      if (autoplayInterval) clearInterval(autoplayInterval);
+      if (autoplayInterval) {
+        window.clearInterval(autoplayInterval);
+        autoplayInterval = null;
+      }
     };
 
     // Event Listeners
@@ -215,8 +226,7 @@ const hasSlides = slides.length > 0;
 
     dots.forEach((dot) => {
       dot.addEventListener('click', (e) => {
-        const target = e.currentTarget as HTMLElement;
-        const index = parseInt(target.getAttribute('data-index') || '0', 10);
+        const index = parseInt(e.currentTarget.getAttribute('data-index') || '0', 10);
         if (index !== currentIndex) {
           updateSlider(index);
           startAutoplay();
@@ -229,12 +239,12 @@ const hasSlides = slides.length > 0;
     let touchEndX = 0;
 
     slider.addEventListener('touchstart', (e) => {
-      touchStartX = (e as TouchEvent).changedTouches[0].screenX;
+      touchStartX = e.changedTouches[0].screenX;
       stopAutoplay(); // Pause on touch
     }, { passive: true });
 
     slider.addEventListener('touchend', (e) => {
-      touchEndX = (e as TouchEvent).changedTouches[0].screenX;
+      touchEndX = e.changedTouches[0].screenX;
       handleSwipe();
       startAutoplay(); // Resume
     }, { passive: true });
@@ -250,9 +260,18 @@ const hasSlides = slides.length > 0;
       }
     };
 
-    // Pause autoplay on hover (desktop)
-    slider.addEventListener('mouseenter', stopAutoplay);
-    slider.addEventListener('mouseleave', startAutoplay);
+    // Pause autoplay on hover (desktop only)
+    slider.addEventListener('mouseenter', () => {
+      if (window.matchMedia('(hover: hover)').matches) {
+        stopAutoplay();
+      }
+    });
+    
+    slider.addEventListener('mouseleave', () => {
+      if (window.matchMedia('(hover: hover)').matches) {
+        startAutoplay();
+      }
+    });
 
     // Initialize
     startAutoplay();
@@ -260,6 +279,6 @@ const hasSlides = slides.length > 0;
 
   // Run on load and after view transitions
   document.addEventListener('astro:page-load', initHeroSlider);
-  // Also run initially just in case page-load event is missed or not using view transitions
+  // Fallback for first load if astro:page-load hasn't fired yet
   initHeroSlider();
 </script>
