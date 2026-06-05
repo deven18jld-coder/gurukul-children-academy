@@ -54,7 +54,7 @@ export const programs: Program[] = [
       { name: 'Music & Movement', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>' },
       { name: 'Art', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>' }
     ],
-    whyChooseText: 'Playgroup at Kiddies Academy provides the perfect balance of care and early learning. Our low student-to-teacher ratio ensures your toddler receives personalized attention, while our thoughtfully designed environment encourages natural curiosity.'
+    whyChooseText: 'Playgroup at Gurukul Children Academy provides the perfect balance of care and early learning. Our low student-to-teacher ratio ensures your toddler receives personalized attention, while our thoughtfully designed environment encourages natural curiosity.'
   },
   {
     slug: 'nursery',

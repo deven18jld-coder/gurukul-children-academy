@@ -9,6 +9,30 @@ const IMAGES_DIR = path.join(process.cwd(), 'public', 'images');
 const OUTPUT_DIR = path.join(process.cwd(), 'src', 'generated');
 const OUTPUT_FILE = path.join(OUTPUT_DIR, 'image-manifest.json');
 
+const REQUIRED_DIRS = [
+  'hero/home',
+  'hero/about',
+  'hero/admissions',
+  'hero/facilities',
+  'hero/gallery',
+  'hero/contact',
+  'principal',
+  'teachers',
+  'facilities/classrooms',
+  'facilities/library',
+  'facilities/playground',
+  'facilities/transport',
+  'facilities/activity-room',
+  'facilities/safety',
+  'gallery/campus-life',
+  'gallery/events',
+  'gallery/sports',
+  'gallery/activities',
+  'gallery/celebrations',
+  'logo',
+  'og'
+];
+
 function buildManifest(dir) {
   const result = {};
   
@@ -64,12 +88,10 @@ function buildManifest(dir) {
   // Build nested structure
   for (const subDir of directories) {
     const subManifest = buildManifest(path.join(dir, subDir.name));
-    if (Object.keys(subManifest).length > 0 || (Array.isArray(subManifest) && subManifest.length > 0)) {
-      result[subDir.name] = subManifest;
-    }
+    result[subDir.name] = subManifest;
   }
   
-  if (images.length > 0) {
+  if (images.length > 0 || directories.length === 0) {
     if (Object.keys(result).length === 0) {
       return images;
     } else {
@@ -84,6 +106,14 @@ function generate() {
   console.log('Generating image manifest...');
   if (!fs.existsSync(IMAGES_DIR)) {
     fs.mkdirSync(IMAGES_DIR, { recursive: true });
+  }
+
+  // Pre-create required directories
+  for (const reqDir of REQUIRED_DIRS) {
+    const fullPath = path.join(IMAGES_DIR, reqDir);
+    if (!fs.existsSync(fullPath)) {
+      fs.mkdirSync(fullPath, { recursive: true });
+    }
   }
 
   const manifest = buildManifest(IMAGES_DIR);

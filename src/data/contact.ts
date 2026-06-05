@@ -1,28 +1,28 @@
 export const contactData = {
-  schoolName: "Kiddies Academy",
-  establishedYear: "2015",
-  board: "State Board / CBSE",
-  classesOffered: "Playgroup to Grade 5",
+  schoolName: "Gurukul Children Academy",
+  establishedYear: "TBD",
+  board: "NCERT",
+  classesOffered: "Nursery to 8th",
   
   phone: {
-    display: "+91 98765 43210",
-    value: "tel:+919876543210"
+    display: "+91 9838535987",
+    value: "tel:+919838535987"
   },
   whatsapp: {
-    display: "+91 98765 43210",
-    value: "https://wa.me/919876543210"
+    display: "+91 9838535987",
+    value: "https://wa.me/919838535987"
   },
   email: {
-    display: "admissions@kiddiesacademy.edu",
-    value: "mailto:admissions@kiddiesacademy.edu"
+    display: "gurukulchildrenacademy@gmail.com",
+    value: "mailto:gurukulchildrenacademy@gmail.com"
   },
   
   address: {
-    street: "123 Education Lane, Knowledge Park",
-    city: "Bangalore",
-    state: "Karnataka",
-    pincode: "560001",
-    full: "123 Education Lane, Knowledge Park, Bangalore, Karnataka 560001"
+    street: "Belsar",
+    city: "Gonda",
+    state: "Uttar Pradesh",
+    pincode: "TBD",
+    full: "Belsar, Gonda"
   },
   
   timings: {
@@ -32,7 +32,7 @@ export const contactData = {
   },
   
   map: {
-    url: "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent("123 Education Lane, Knowledge Park, Bangalore, Karnataka 560001"),
+    url: "https://maps.app.goo.gl/FvnLv38bPCApRY9r5",
     iframeSrc: "" // Placeholder for future Google Maps iframe embed
   }
 };
@@ -52,6 +52,6 @@ export const contactFaqs = [
   },
   {
     question: "Who should I contact for fee-related queries?",
-    answer: "You can reach out to our accounts department directly by calling our main line and selecting extension 2, or by emailing accounts@kiddiesacademy.edu."
+    answer: "You can reach out to our accounts department directly by calling our main line and selecting extension 2, or by emailing gurukulchildrenacademy@gmail.com."
   }
 ];

@@ -1,6 +1,6 @@
 import { contactData } from '../data/contact';
 
-const siteUrl = 'https://kiddiesacademy.in';
+const siteUrl = 'https://gurukulchildrenacademy.placeholder.com';
 
 export function getSchoolSchema() {
   return {
@@ -9,7 +9,7 @@ export function getSchoolSchema() {
     "name": contactData.schoolName,
     "url": siteUrl,
     "logo": `${siteUrl}/favicon.svg`,
-    "description": "Kiddies Academy - Where Every Child's Story Begins. Nurturing bright futures with a holistic and playful approach to learning.",
+    "description": "Gurukul Children Academy - Where Every Child's Story Begins. Nurturing bright futures with a holistic and playful approach to learning.",
     "foundingDate": contactData.establishedYear,
     "telephone": contactData.phone.display,
     "email": contactData.email.display.replace('mailto:', ''),

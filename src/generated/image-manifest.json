@@ -1,1 +1,29 @@
-{}
+{
+  "facilities": {
+    "activity-room": [],
+    "classrooms": [],
+    "library": [],
+    "playground": [],
+    "safety": [],
+    "transport": []
+  },
+  "gallery": {
+    "activities": [],
+    "campus-life": [],
+    "celebrations": [],
+    "events": [],
+    "sports": []
+  },
+  "hero": {
+    "about": [],
+    "admissions": [],
+    "contact": [],
+    "facilities": [],
+    "gallery": [],
+    "home": []
+  },
+  "logo": [],
+  "og": [],
+  "principal": [],
+  "teachers": []
+}
