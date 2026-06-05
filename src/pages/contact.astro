@@ -1,0 +1,23 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import ContactHero from '../components/sections/contact/ContactHero.astro';
+import ContactOptions from '../components/sections/contact/ContactOptions.astro';
+import CampusVisit from '../components/sections/contact/CampusVisit.astro';
+import MapSection from '../components/sections/contact/MapSection.astro';
+import ContactFAQ from '../components/sections/contact/ContactFAQ.astro';
+import ContactCTA from '../components/sections/contact/ContactCTA.astro';
+---
+
+<PageLayout 
+  title="Contact Us - Kiddies Academy" 
+  description="Get in touch with Kiddies Academy. Find our phone number, email address, campus location, and operating hours."
+>
+  <ContactHero />
+  <ContactOptions />
+  <div id="visit">
+    <CampusVisit />
+  </div>
+  <MapSection />
+  <ContactFAQ />
+  <ContactCTA />
+</PageLayout>

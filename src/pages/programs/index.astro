@@ -1,0 +1,39 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import ProgramsHero from '../../components/sections/programs/ProgramsHero.astro';
+import ProgramsOverview from '../../components/sections/programs/ProgramsOverview.astro';
+import ProgramsGrid from '../../components/sections/programs/ProgramsGrid.astro';
+import LearningPhilosophy from '../../components/sections/programs/LearningPhilosophy.astro';
+import AdmissionsCTA from '../../components/sections/AdmissionsCTA.astro';
+
+import { programs } from '../../data/programs';
+
+const philosophyItems = [
+  {
+    title: "Play-Based Learning",
+    description: "We believe children learn best when they are actively engaged and having fun. Our curriculum integrates play into every subject.",
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="m9 15 2 2 4-4"/></svg>'
+  },
+  {
+    title: "Child-Centric Approach",
+    description: "Every child is unique. We tailor our teaching methods to accommodate different learning styles and paces. <a href='/admissions' class='text-secondary hover:underline'>Speak to our admissions team</a> to learn more.",
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>'
+  },
+  {
+    title: "Holistic Development",
+    description: "Beyond academics, we focus on emotional intelligence, physical health, and social skills. View our <a href='/gallery' class='text-secondary hover:underline'>gallery</a> to see our students in action.",
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9 9 0 0 0 9-9H3a9 9 0 0 0 9 9Z"/><path d="M12 3a9 9 0 0 0 9 9H3a9 9 0 0 0 9-9Z"/></svg>'
+  }
+];
+---
+
+<PageLayout 
+  title="Our Programs - Kiddies Academy" 
+  description="Explore our comprehensive learning programs from Playgroup to Primary grades, designed to nurture your child at every stage."
+>
+  <ProgramsHero />
+  <ProgramsOverview />
+  <ProgramsGrid programs={programs} />
+  <LearningPhilosophy items={philosophyItems} />
+  <AdmissionsCTA />
+</PageLayout>

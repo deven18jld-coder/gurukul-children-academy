@@ -1,0 +1,65 @@
+---
+import Container from '../../ui/Container.astro';
+
+interface Step {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+interface Props {
+  title?: string;
+  steps: Step[];
+}
+
+const { 
+  title = "A Simple Admission Process",
+  steps
+} = Astro.props;
+---
+
+<section class="py-20 md:py-28 bg-soft-bg relative">
+  <Container>
+    <div class="text-center max-w-3xl mx-auto mb-20">
+      <h2 class="text-3xl md:text-4xl font-nunito font-bold text-primary mb-4">
+        {title}
+      </h2>
+      <div class="w-16 h-1 bg-accent mx-auto rounded-full"></div>
+    </div>
+
+    <!-- Desktop: Horizontal, Mobile: Vertical -->
+    <div class="relative max-w-5xl mx-auto">
+      
+      <!-- Connecting Line -->
+      <div class="absolute top-12 left-8 md:left-12 right-12 h-1 bg-white hidden lg:block rounded-full"></div>
+      <div class="absolute top-12 bottom-12 left-8 w-1 bg-white lg:hidden rounded-full"></div>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-6 relative">
+        {steps.map((step, index) => (
+          <div class="relative flex lg:flex-col items-start lg:items-center text-left lg:text-center group">
+            
+            <!-- Number / Icon Circle -->
+            <div class="relative w-16 h-16 rounded-full bg-white border-4 border-soft-bg shadow-md flex items-center justify-center text-primary flex-shrink-0 z-10 group-hover:scale-110 group-hover:border-primary/10 group-hover:text-secondary transition-all duration-300 lg:mb-8">
+              <div class="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-accent text-primary text-xs font-bold flex items-center justify-center shadow-sm">
+                {index + 1}
+              </div>
+              <Fragment set:html={step.icon} />
+            </div>
+            
+            <!-- Content -->
+            <div class="ml-6 lg:ml-0 mt-2 lg:mt-0 bg-white lg:bg-transparent p-6 lg:p-0 rounded-2xl shadow-sm lg:shadow-none border border-primary/5 lg:border-none w-full">
+              <h3 class="text-xl font-nunito font-bold text-primary mb-3">
+                {step.title}
+              </h3>
+              <p class="text-text/70 text-sm leading-relaxed">
+                {step.description}
+              </p>
+            </div>
+            
+          </div>
+        ))}
+      </div>
+      
+    </div>
+  </Container>
+</section>

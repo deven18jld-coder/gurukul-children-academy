@@ -1,0 +1,33 @@
+---
+import Container from '../../ui/Container.astro';
+import { contactFaqs } from '../../../data/contact';
+---
+
+<section class="py-20 md:py-28 bg-soft-bg relative border-t border-primary/5">
+  <Container>
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-3xl md:text-4xl font-nunito font-bold text-primary mb-4">
+        Contact FAQ
+      </h2>
+      <p class="text-text/70 text-lg">
+        Quick answers to common questions about visiting or contacting the school.
+      </p>
+    </div>
+
+    <div class="max-w-3xl mx-auto space-y-4">
+      {contactFaqs.map((faq) => (
+        <details class="group bg-white rounded-2xl border border-primary/5 shadow-sm overflow-hidden [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex items-center justify-between p-6 cursor-pointer font-bold text-primary hover:text-secondary transition-colors">
+            {faq.question}
+            <span class="ml-4 flex-shrink-0 text-secondary transition-transform duration-300 group-open:rotate-180">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </summary>
+          <div class="p-6 pt-0 text-text/80 leading-relaxed border-t border-primary/5 mt-2 bg-background">
+            <p class="pt-4">{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </Container>
+</section>

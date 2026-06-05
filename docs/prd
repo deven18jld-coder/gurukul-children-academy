@@ -1,0 +1,1160 @@
+# 🏫 Kiddies Academy — School Website PRD & Architecture
+> **Phase 1 (Static) + Phase 2 (Admin Panel) Roadmap**
+
+| Field | Details |
+|---|---|
+| **Document Type** | Product Requirements Document (PRD) |
+| **Product** | Kiddies Academy — Nursery & Primary School Website |
+| **Version** | v1.0 — Phase 1 MVP |
+| **Tech Stack** | Astro JS (Static Site Generation) |
+| **Audience** | Parents of children aged 2–12, Indian Market |
+| **Prepared by** | Senior PM + Lead Architect |
+| **Date** | 2025 |
+| **Status** | Implementation-Ready |
+
+---
+
+## Table of Contents
+
+- [A. Executive Summary](#a-executive-summary)
+- [B. Product Requirements Document](#b-product-requirements-document)
+- [C. Sitemap & Information Architecture](#c-sitemap--information-architecture)
+- [D. Page-by-Page Content Outline](#d-page-by-page-content-outline)
+- [E. Design System Direction](#e-design-system-direction)
+- [F. Technical Architecture](#f-technical-architecture)
+- [G. Folder Structure](#g-folder-structure)
+- [H. Data Model](#h-data-model)
+- [I. SEO Strategy](#i-seo-strategy)
+- [J. Future Admin Panel Roadmap](#j-future-admin-panel-roadmap)
+- [K. SEO Checklist](#k-seo-checklist)
+- [L. MVP Checklist — Phase 1](#l-mvp-checklist--phase-1)
+- [M. Phase 2 Checklist — Admin Panel](#m-phase-2-checklist--admin-panel)
+
+---
+
+## A. Executive Summary
+
+Kiddies Academy needs a website that wins the trust of Indian parents in under 3 seconds, drives admission enquiries, and lays the groundwork for a future content-managed experience — all without rebuilding the frontend. This PRD defines every aspect of the Phase 1 static site and the Phase 2 admin-panel transition.
+
+### Core Problem
+
+Most nursery/primary school websites in India fall into two traps: either they look like 1990s clip-art fests, or they are generic SaaS website templates with no soul. Neither earns parent trust. Kiddies Academy must look like the premium option the moment a parent lands on it.
+
+### The Solution
+
+A hand-crafted, component-driven Astro JS static site that feels warm and child-friendly — but is built with the precision and performance of a modern SaaS product. Every section has a clear job: reduce doubt, build trust, and invite action.
+
+### Business Impact
+
+- Increase online admission enquiries by 60%+ over the current touchpoints.
+- Build a digital brand that positions Kiddies Academy as the category leader in its city.
+- Create a zero-maintenance-cost marketing engine via static hosting (Netlify/Vercel).
+- Prepare the architecture so an admin panel can be added later without a full rewrite.
+
+### Key Decisions Summary
+
+| Decision | Choice | Reason |
+|---|---|---|
+| Framework | Astro JS 5.x | Zero-JS by default, island architecture, SSG |
+| Hosting | Netlify / Vercel | Free tier, CDN edge, instant deploys |
+| Content Layer | JSON + Markdown | Admin-panel-ready, version-controllable |
+| CSS Strategy | Tailwind CSS + custom tokens | Rapid development, consistent spacing |
+| Images | WebP via Astro Image | Performance, lazy loading |
+| Forms | Netlify Forms / Formspree | Static-friendly, zero backend |
+| Analytics | Google Analytics 4 + Clarity | Free, Indian market standard |
+| SEO | Custom SEO component | Automated meta, OG, schema |
+| Phase 2 API | Directus / Sanity / Strapi | Headless CMS, API-first |
+
+---
+
+## B. Product Requirements Document
+
+### B1. Product Vision
+
+> *Build the most trusted, fastest-loading, and most parent-friendly nursery school website in the region — one that feels like a warm hug for the parent and a big adventure invitation for the child.*
+
+Kiddies Academy's website is its first classroom. Before a parent walks through the school gate, they walk through the website. Every pixel, every word, and every millisecond of load time is a first impression.
+
+### B2. Target Users
+
+#### Primary: Parents & Guardians
+
+- Age: 25–45 years, Indian urban and semi-urban markets.
+- Devices: 75%+ on mobile (Android-first, then iOS).
+- Language: English with some Hindi phrases for warmth.
+- Mental state: Anxious, comparing 3–5 schools simultaneously.
+- Decision driver: Trust, safety, curriculum quality, teacher quality, fees transparency, location.
+
+#### Secondary: School Management
+
+- Need to update events, gallery, news regularly.
+- Want enquiry leads delivered to their email/WhatsApp.
+- Phase 2: Want a self-service content dashboard.
+
+#### Tertiary: Search Engines
+
+- Google India is the primary discovery channel.
+- Local SEO is critical — parents search "nursery school near me" or "best school in [city]".
+
+### B3. User Goals
+
+| Goal | Description |
+|---|---|
+| **Parent Goal** | Find the safest, best-value school for my child quickly. |
+| **Parent Goal** | Understand the curriculum and daily routine. |
+| **Parent Goal** | See proof of happy children and good teachers. |
+| **Parent Goal** | Know admission dates, fees, and process without calling. |
+| **Parent Goal** | Be able to make an enquiry easily from my phone. |
+| **School Goal** | Convert website visitors into admission enquiries. |
+| **School Goal** | Rank #1 on Google for local school searches. |
+| **School Goal** | Look more premium than competitor schools. |
+| **School Goal** | Reduce manual enquiry calls by giving answers online. |
+
+### B4. Business Goals
+
+- Increase online admission form submissions by 60% in year 1.
+- Achieve top 3 Google ranking for "[City] nursery school" within 6 months.
+- Achieve Google PageSpeed score of 90+ on mobile.
+- Reduce bounce rate below 45% through engaging, fast content.
+- Build a digital asset that is ready for Phase 2 admin panel without a rewrite.
+- Establish Kiddies Academy as a recognisable visual brand in the region.
+
+### B5. Core Pages
+
+| URL | Page |
+|---|---|
+| `/` | Home — hero, trust signals, programme overview, testimonials, CTA |
+| `/about` | About — vision, mission, principal's message, team, milestones |
+| `/programs` | Programmes — playgroup, nursery, LKG, UKG, primary classes |
+| `/admissions` | Admissions — process, dates, fee structure, enquiry form |
+| `/facilities` | Facilities — classrooms, playground, library, labs, transport |
+| `/activities` | Activities — sports, arts, music, dance, yoga, cultural |
+| `/gallery` | Gallery — photo grid by category and year |
+| `/events` | Events & News — upcoming events, past highlights |
+| `/testimonials` | Testimonials — parent quotes, ratings, video embed |
+| `/faq` | FAQ — grouped by category |
+| `/contact` | Contact — map, phone, email, hours, WhatsApp link |
+| `/blog` | Blog/Articles — parenting tips, school news (Phase 2) |
+
+### B6. Features — Phase 1 (Static MVP)
+
+- Responsive, mobile-first design (320px to 2560px).
+- Astro JS static generation with zero layout shift.
+- SEO: meta tags, OG tags, JSON-LD schema on all pages.
+- Admission enquiry form with email/WhatsApp delivery.
+- WhatsApp floating CTA button.
+- Google Maps embed on Contact page.
+- Gallery with category filter (CSS/JS island).
+- Animated hero section (subtle, CSS-only or minimal JS).
+- Testimonial carousel.
+- Event listing from JSON data file.
+- FAQ accordion.
+- Google Analytics 4 + Microsoft Clarity.
+- Sitemap.xml and robots.txt auto-generated.
+- Image optimisation via Astro's built-in Image component.
+- Dark-mode ready (optional, Phase 1.5).
+- 404 error page, branded.
+- Netlify/Vercel deployment with CI/CD from GitHub.
+
+### B7. Features — Phase 2 (Admin Panel)
+
+- Headless CMS (Directus, Sanity, or Strapi) connected via REST/GraphQL API.
+- Astro switches from SSG to SSR or ISR (Incremental Static Regeneration).
+- Admin can add/edit: events, gallery, blog posts, testimonials, FAQ, staff.
+- Enquiry leads dashboard — view, filter, export CSV.
+- Online admission form with payment gateway (Razorpay/PayU).
+- Parent login portal for fee receipts, circulars, school calendar.
+- Push notification for events via WhatsApp Business API.
+- Multi-branch support (if school expands).
+- Performance analytics dashboard for school management.
+
+### B8. Performance Goals
+
+| Metric | Target |
+|---|---|
+| Google PageSpeed (Mobile) | >= 90 |
+| Google PageSpeed (Desktop) | >= 95 |
+| First Contentful Paint | < 1.5s |
+| Largest Contentful Paint | < 2.5s |
+| Cumulative Layout Shift | < 0.1 |
+| Total Blocking Time | < 200ms |
+| Bundle Size (JS) | < 50KB gzipped |
+| Image Format | WebP with fallback |
+| CDN | Netlify Edge / Vercel CDN |
+| Lighthouse Accessibility | >= 95 |
+
+### B9. Accessibility Goals
+
+- WCAG 2.1 Level AA compliance.
+- All images have descriptive alt text.
+- Color contrast ratio >= 4.5:1 for normal text.
+- Keyboard navigable — focus states visible.
+- ARIA labels on all interactive components.
+- Form fields have associated labels and error messages.
+- Skip-to-content link on every page.
+- Font size minimum 16px body, 14px smallest label.
+- Tab order is logical and follows visual hierarchy.
+
+### B10. Risks & Assumptions
+
+| Risk | Impact | Mitigation |
+|---|---|---|
+| Slow image uploads from school | High | Provide image spec sheet; optimise in CI pipeline |
+| Content not ready at launch | Medium | Use placeholder content with clear flagging |
+| Admin wants instant CMS in Phase 1 | Medium | Educate on Phase 2 roadmap; offer Netlify CMS as interim |
+| Google ranking not quick enough | Medium | Pair with Google Business Profile setup and backlinks |
+| Form spam submissions | Low | Honeypot + Netlify spam filtering |
+| WhatsApp link format incorrect | Low | Test on Android/iOS before launch |
+| School branding assets not available | Medium | Create placeholder brand kit as part of Phase 1 |
+
+---
+
+## C. Sitemap & Information Architecture
+
+> *Every URL is SEO-optimised, lowercase, hyphen-separated, and descriptive. No query parameters in Phase 1 URLs.*
+
+### C1. Full Sitemap
+
+#### Primary Navigation (Top Menu)
+
+- `/` — Home
+- `/about` — About Us
+- `/programs` — Our Programmes
+  - `/programs/playgroup` — Playgroup (Age 2–3)
+  - `/programs/nursery` — Nursery (Age 3–4)
+  - `/programs/lkg` — LKG (Age 4–5)
+  - `/programs/ukg` — UKG (Age 5–6)
+  - `/programs/primary` — Primary Classes I–V (Age 6–11)
+- `/admissions` — Admissions
+- `/facilities` — Facilities
+- `/activities` — Activities & Co-curricular
+- `/gallery` — Gallery
+- `/events` — Events & News
+- `/contact` — Contact Us
+
+#### Secondary / Footer Navigation
+
+- `/testimonials` — Parent Testimonials
+- `/faq` — Frequently Asked Questions
+- `/blog` — School Blog (Phase 2 launch)
+- `/privacy-policy` — Privacy Policy
+- `/sitemap.xml` — XML Sitemap (auto-generated)
+
+#### Utility Pages
+
+- `/404` — Custom branded not-found page
+- `/thank-you` — Post-form-submission confirmation
+- `/admission-form` — Standalone enquiry/admission form
+
+### C2. Navigation Architecture
+
+| Element | Detail |
+|---|---|
+| **Primary Nav (Desktop)** | Sticky horizontal bar: Logo │ Home │ About │ Programmes │ Admissions │ Gallery │ Contact │ [Enquire Now button] |
+| **Primary Nav (Mobile)** | Hamburger menu, full-screen overlay, large tap targets (min 48px), WhatsApp CTA always visible |
+| **Footer Nav** | Three-column: Quick Links │ Contact Info │ Social Media + school logo + tagline |
+| **Breadcrumbs** | All interior pages: Home > Section > Page Name |
+| **CTA Button** | Always-visible floating WhatsApp + fixed "Enquire Now" in nav |
+
+---
+
+## D. Page-by-Page Content Outline
+
+### D1. Home Page (/)
+
+#### Section 1: Hero
+- **Headline:** "Where Every Child's Story Begins" or "Nurturing Bright Futures Since [Year]"
+- **Sub-headline:** "Playful. Safe. Premium. — [City]'s Most Loved School for Ages 2–12."
+- **CTA:** "Enquire for Admission" (primary) + "Take a Virtual Tour" (secondary)
+- **Background:** Full-bleed photo/video of happy children in a bright classroom. Real school photographs only.
+- **Trust badges:** CBSE Affiliated | ISO Certified | Est. [Year] | [X]+ Happy Families
+
+#### Section 2: Why Kiddies Academy
+4–6 icon cards: Safe & Secure Campus | Expert Educators | Holistic Curriculum | Modern Facilities | Activity-Rich Day | Parent Partnership
+
+#### Section 3: Age-Group Programmes Preview
+Row of cards: Playgroup | Nursery | LKG | UKG | Primary. Each card has illustration, age range, and "Learn More" link.
+
+#### Section 4: A Day at Kiddies Academy
+Visual timeline or illustrated grid: 8:00 AM arrival → morning circle → learning blocks → outdoor play → lunch → nap/rest → activity → dismissal.
+
+#### Section 5: Facilities Snapshot
+Full-width image grid of 3–4 facility photos with labels. "See All Facilities" CTA.
+
+#### Section 6: Parent Testimonials
+3 featured testimonial cards with parent name, ward's class, and quote. Star rating. Rotating carousel on mobile.
+
+#### Section 7: Upcoming Events
+2–3 event cards pulled from data file. "View All Events" link.
+
+#### Section 8: Gallery Preview
+Masonry-style grid of 6–8 photos. "View Full Gallery" link.
+
+#### Section 9: Admission CTA Banner
+Bold banner: "Admissions Open for 2025–26 | Limited Seats Available" with "Apply Now" button.
+
+#### Section 10: Map + Contact Strip
+Google Maps embed, address, phone, email, WhatsApp link. "Get Directions" button.
+
+---
+
+### D2. About Page (/about)
+
+- Hero: School building photo + tagline + founding year.
+- Vision & Mission: Clearly stated, formatted for readability.
+- Principal's Message: Photo + name + 150-word personal note.
+- Our Story: 3–4 key milestones on a visual timeline.
+- Core Values: Icon grid — Respect, Integrity, Creativity, Compassion, Excellence.
+- Meet the Team: Grid of teacher photos, name, qualification, specialisation.
+- Achievements & Recognition: Awards, affiliations, inspection results.
+- Affiliations: CBSE board logo, state education board, ISO badge, etc.
+
+### D3. Programmes Page (/programs)
+
+- Programme overview — age group table.
+- Each sub-programme page has: Hero | Age group | Learning outcomes | Daily schedule | Subjects | What your child will achieve | Teacher qualification | Related Activities | CTA.
+- Curriculum philosophy: Montessori elements, play-based, activity-led learning.
+- Assessment approach: No-pressure formative assessment, parent reports.
+
+### D4. Admissions Page (/admissions)
+
+- Admission status banner: "Admissions Open / Closed" (driven by data file).
+- Eligibility: Age criteria for each class.
+- Step-by-step process: 4 numbered steps — Enquire > Visit > Submit Docs > Confirm Seat.
+- Documents required: Birth certificate, Aadhar, passport photos, etc.
+- Academic calendar: Key dates in a table.
+- Fee structure: Per-programme fee range (or "Contact for fee details").
+- Inline enquiry/admission form: Name, child name, age, programme, mobile, email, message.
+- FAQ snippet: Top 5 admission questions with accordions.
+
+### D5. Facilities Page (/facilities)
+
+Facility cards (with photo) for: Smart Classrooms | Outdoor Playground | Library & Reading Corner | Activity & Art Room | Dance & Music Room | Computer Lab | Cafeteria / Tiffin Area | Medical Room | CCTV & Security | Transport.
+
+Each card: Name, 2-sentence description, 3 key features, photo.
+
+### D6. Activities Page (/activities)
+
+- Activity categories: Sports & Fitness | Arts & Crafts | Music & Dance | Drama & Theatre | Yoga & Mindfulness | Cultural & Festivals | Field Trips | Competitions.
+- Annual events callout: Annual Day, Sports Day, Science Fair, Fest.
+
+### D7. Gallery Page (/gallery)
+
+- Filter tabs: All | Classrooms | Events | Festivals | Sports | Art | Outdoor.
+- Responsive masonry/grid layout.
+- Lightbox on click.
+- Category and year label on each image card.
+- Images sourced from `public/images/gallery/*`.
+
+### D8. Events & News Page (/events)
+
+- Upcoming events: Date, name, description, location, "Add to Calendar" link.
+- Past events / highlights: Photo + brief recap.
+- School circulars (if needed): PDF download links.
+
+### D9. Testimonials Page (/testimonials)
+
+- Star rating summary (e.g., 4.8/5 from X parents).
+- Filter: All | Playgroup | Nursery | Primary.
+- Individual testimonial cards: Parent name | Child's class | Quote | Date | Star rating.
+- Video testimonial embeds (YouTube, 1–2 videos).
+- Google Reviews widget embed.
+
+### D10. FAQ Page (/faq)
+
+- Categories: Admissions | Curriculum | Facilities | Fees | Transport | Safety.
+- Accordion UI — one open at a time.
+- Search bar (Phase 2, or simple keyword filter in Phase 1).
+- Not-found state: "Can't find your answer? WhatsApp us."
+
+### D11. Contact Page (/contact)
+
+- School address (full Indian format with pincode).
+- Phone numbers (primary + alternate).
+- Email address.
+- WhatsApp link.
+- Google Maps embed (full width on mobile).
+- Office hours table.
+- Contact form: Name, email, phone, subject, message.
+- Social media icons: Facebook, Instagram, YouTube.
+
+---
+
+## E. Design System Direction
+
+### E1. Visual Philosophy
+
+> *Child-friendly warmth meets premium school confidence. Think Montessori classroom meets Apple.com — clean, spacious, trustworthy, with pops of joy.*
+
+The design must achieve three things simultaneously: make children feel excited, make parents feel safe, and make the school look professional.
+
+### E2. Colour Palette
+
+| Role | Hex | Usage |
+|---|---|---|
+| Primary (Deep Navy) | `#12304A` | CTA buttons, headings, nav, links |
+| Secondary (Muted Teal-Blue) | `#2F6F8F` | Accents, highlights, dividers, badges |
+| Accent (Soft Gold) | `#D6A65A` | Hover states, icons, tags, urgency |
+| Background (Warm Cream) | `#F7F3EC` | Primary background, card backgrounds |
+| Text | `#1E293B` | Body text |
+| Soft Section Bg | `#EAF2F6` | Section backgrounds, card fills |
+
+> Avoid: garish neon, black backgrounds, overly pastel washed-out combinations. Maintain contrast ratio 4.5:1+.
+
+### E3. Typography
+
+| Element | Spec |
+|---|---|
+| **Heading Font** | Nunito (Google Fonts) — rounded, friendly, readable, premium. |
+| **Body Font** | Inter (Google Fonts) — highly legible, modern, professional. |
+| **Accent / Tagline** | Nunito (bold, 700+) — for hero taglines. |
+| **H1 Size** | 56–72px desktop │ 36–44px mobile |
+| **H2 Size** | 40–48px desktop │ 28–32px mobile |
+| **H3 Size** | 28–32px desktop │ 22–24px mobile |
+| **Body Size** | 16–18px desktop │ 16px mobile |
+| **Small / Caption** | 14px — minimum |
+| **Line Height** | 1.6 for body │ 1.2 for headings |
+| **Letter Spacing** | -0.01em headings │ 0 body |
+
+### E4. Spacing & Layout Rules
+
+- Base spacing unit: 8px. All spacing is multiples of 8.
+- Section vertical padding: 80px desktop | 48px mobile.
+- Container max-width: 1200px, centered.
+- Card grid: 3 columns desktop | 2 columns tablet | 1 column mobile.
+- Grid gap: 24px desktop | 16px mobile.
+- Border radius: 12px cards | 8px buttons | 4px inputs | 24px pill badges.
+- Box shadow: subtle (`0 4px 16px rgba(0,0,0,0.08)`) — no harsh drop shadows.
+- Section backgrounds alternate: White > Light Blue Tint > White > Light Gray.
+
+### E5. Hero Section Strategy
+
+The hero must answer three questions in 3 seconds: Where is this? What is it? Why should I care?
+
+- Full-viewport-height on desktop, 80vh on mobile.
+- Layered composition: background photo (real school) + soft dark gradient overlay + text.
+- Single bold H1, supporting subheadline, two CTA buttons.
+- Trust strip below hero: "Affiliated by CBSE | Est. [Year] | [X]+ Happy Families | Rated [X]/5"
+- Subtle entrance animation: text fades up, trust strip slides in.
+- **Never** use auto-playing videos in hero — use poster image + play button.
+
+### E6. Trust Signals (Critical for Indian Parent)
+
+- CBSE/Board affiliation badge — prominently above the fold.
+- Years established — "Nurturing children since 2010" builds confidence.
+- Number of students/alumni — social proof.
+- Teacher qualification strip — "All teachers are B.Ed. / NTT certified".
+- Safety callout — "CCTV on every floor | Police-verified staff | GPS-tracked buses".
+- Awards and recognitions — real ones only.
+- Google rating widget or star rating display.
+- Parent quotes — with photo and child's class for credibility.
+- Principal's photo and name — puts a real face to the school.
+
+### E7. CTA Placement Strategy
+
+- **Primary CTA:** "Enquire for Admission" — in Hero, Nav (button), Admission section, and Page footer.
+- **Secondary CTA:** "Download Brochure" (PDF) — About and Admissions pages.
+- **Sticky CTA:** WhatsApp floating button — bottom-right, always visible.
+- **Inline CTA:** Each programme card has "Learn More" and "Apply Now".
+- **Micro-CTA:** FAQ has "Still have questions? WhatsApp us."
+- **Rule:** Never have more than one primary CTA per section. Secondary CTA is always ghost/outline style.
+
+### E8. Image Style Guidance
+
+- Real photos only — no stock photos of children.
+- Lighting: Warm, golden, natural. Avoid harsh flash.
+- Composition: Children looking engaged, teachers smiling, facilities looking clean.
+- Diversity: Include children of varied backgrounds.
+- Format: WebP primary, JPEG fallback. Min 1200px wide for hero images.
+- File size: <100KB for card thumbnails, <300KB for full-section images.
+- Gallery: Consistent aspect ratios per section (4:3 for events, 1:1 for portraits).
+
+### E9. Animation Guidance
+
+- Philosophy: Animations should feel like a warm welcome, not a circus.
+- Hero: Fade-in + translate-up (200ms ease-out) for text. No parallax.
+- Cards: Subtle scale on hover (1.02 transform). 150ms ease.
+- Section entrance: Intersection Observer fade-in as you scroll (stagger 100ms per card).
+- CTA button: Gentle pulse on first load (once only, not looping).
+- Reduced motion: Respect `prefers-reduced-motion` — all animations disabled.
+- Maximum: 300ms for transitions.
+
+### E10. Do's and Don'ts
+
+| Element | DO | DON'T |
+|---|---|---|
+| Colors | Use the defined palette consistently | Use garish neon or rainbow text |
+| Photos | Use real school photos | Use stock photos of children |
+| Fonts | Stick to Nunito + Inter | Mix 4+ fonts |
+| CTAs | One primary CTA per section | Flood every section with 3 buttons |
+| Text | Short, parent-focused copy | Academic jargon or 500-word blocks |
+| Icons | Use consistent icon set (Lucide) | Mix multiple icon libraries |
+| Cards | Consistent border radius and shadow | Different card styles per section |
+| Mobile | Design mobile-first, then scale up | Design desktop, shrink to mobile |
+| Whitespace | Generous padding and breathing room | Cram content to save space |
+| Animation | Subtle, purposeful, fast | Looping, flashy, distracting |
+
+---
+
+## F. Technical Architecture
+
+### F1. Tech Stack
+
+| Layer | Choice |
+|---|---|
+| **Framework** | Astro JS 5.x — SSG mode, islands architecture |
+| **Styling** | Tailwind CSS 4.x + CSS variables using `@theme` |
+| **Language** | TypeScript — strict mode, for data models and utilities |
+| **Icons** | Lucide Icons — via `lucide` package |
+| **Images** | `@astrojs/image` — automatic WebP conversion, lazy loading |
+| **Forms** | Netlify Forms (static) or Formspree — zero backend needed |
+| **Maps** | Google Maps iframe embed (no API key needed for embed) |
+| **Analytics** | Google Analytics 4 + Microsoft Clarity (via Partytown) |
+| **SEO** | Custom `SEO.astro` component + JSON-LD schema |
+| **Deployment** | Netlify or Vercel (auto-deploy on GitHub push) |
+| **Version Control** | GitHub — main branch deploys to production |
+| **Node.js** | 20.x LTS |
+
+### F2. Astro JS Architecture Decisions
+
+#### Why Astro?
+
+- Zero JavaScript by default — pure HTML/CSS output = fastest possible load times.
+- Islands architecture — interactive components (gallery filter, FAQ accordion, carousel) load JS only when needed.
+- Content Collections — built-in typed content management from Markdown/JSON files.
+- SEO-perfect — server-rendered HTML, no hydration delay for search crawlers.
+- File-based routing — `/src/pages/about.astro` = `/about` URL automatically.
+- Easy migration path — swap SSG to SSR by adding an adapter (Netlify/Vercel) when Phase 2 is ready.
+
+#### Content Strategy: Static Content Layer
+
+In Phase 1, all content lives in structured data files:
+
+| File | Content |
+|---|---|
+| `/src/data/school.json` | School metadata, contact info, social links |
+| `/src/data/events.json` | Events |
+| `/src/data/gallery.json` | Gallery |
+| `/src/data/testimonials.json` | Testimonials |
+| `/src/data/faqs.json` | FAQs |
+| `/src/data/programs.json` | Classes/Programmes |
+| `/src/data/team.json` | Team members |
+| `/src/data/facilities.json` | Facilities |
+| `/src/data/admissions.json` | Admission steps |
+
+> In Phase 2, these JSON files are replaced by API calls to the CMS. The Astro components remain identical — only the data source changes.
+
+### F3. Component Architecture
+
+#### Layout Components
+
+- `src/layouts/BaseLayout.astro` — HTML shell, meta tags, analytics, skip-to-content.
+- `src/layouts/PageLayout.astro` — Extends BaseLayout. Adds Header, Footer, breadcrumbs.
+- `src/layouts/BlogLayout.astro` — For blog/article pages (Phase 2).
+
+#### Global Components
+
+- `src/components/global/Header.astro` — Sticky nav, logo, CTA button, mobile menu.
+- `src/components/global/Footer.astro` — Links, contact, social, copyright.
+- `src/components/global/WhatsAppButton.astro` — Floating WhatsApp CTA.
+- `src/components/global/Breadcrumb.astro` — Schema-marked breadcrumb trail.
+- `src/components/global/SEO.astro` — Meta, OG, JSON-LD injector.
+- `src/components/global/CookieBanner.astro` — GDPR/DPDP-compliant cookie notice.
+
+#### Section Components
+
+- `src/components/sections/Hero.astro` — Full-viewport hero with props for title, subtitle, CTA, image.
+- `src/components/sections/TrustStrip.astro` — Trust badges row.
+- `src/components/sections/ProgrammeCards.astro` — Programme grid.
+- `src/components/sections/TestimonialCarousel.astro` — Testimonial island.
+- `src/components/sections/EventsList.astro` — Event cards from data.
+- `src/components/sections/GalleryGrid.astro` — Filterable gallery island.
+- `src/components/sections/FacilityCards.astro` — Facility image cards.
+- `src/components/sections/AdmissionSteps.astro` — Step-by-step process.
+- `src/components/sections/FAQAccordion.astro` — Accordion island.
+- `src/components/sections/CTABanner.astro` — Admission CTA banner.
+- `src/components/sections/MapEmbed.astro` — Google Maps iframe wrapper.
+- `src/components/sections/ContactForm.astro` — Contact / enquiry form.
+- `src/components/sections/TeamGrid.astro` — Staff photo grid.
+
+#### UI Components (Atoms)
+
+- `src/components/ui/Button.astro` — Primary, secondary, ghost variants.
+- `src/components/ui/Badge.astro` — Tags and status pills.
+- `src/components/ui/Card.astro` — Reusable card wrapper.
+- `src/components/ui/Icon.astro` — Lucide icon wrapper.
+- `src/components/ui/Image.astro` — Astro Image wrapper with standard props.
+- `src/components/ui/Section.astro` — Consistent section wrapper with bg, padding props.
+- `src/components/ui/SectionHeading.astro` — Title + subtitle + decorative element.
+
+### F4. Routing Structure
+
+| File | Route |
+|---|---|
+| `src/pages/index.astro` | `/` |
+| `src/pages/about.astro` | `/about` |
+| `src/pages/programs/index.astro` | `/programs` |
+| `src/pages/programs/[slug].astro` | `/programs/nursery` etc. |
+| `src/pages/admissions.astro` | `/admissions` |
+| `src/pages/facilities.astro` | `/facilities` |
+| `src/pages/activities.astro` | `/activities` |
+| `src/pages/gallery.astro` | `/gallery` |
+| `src/pages/events/index.astro` | `/events` |
+| `src/pages/events/[slug].astro` | `/events/annual-day-2025` |
+| `src/pages/testimonials.astro` | `/testimonials` |
+| `src/pages/faq.astro` | `/faq` |
+| `src/pages/contact.astro` | `/contact` |
+| `src/pages/404.astro` | 404 error page |
+| `src/pages/thank-you.astro` | Post-form thank you |
+| `src/pages/sitemap.xml.ts` | Auto-generated sitemap |
+| `src/pages/robots.txt.ts` | Auto-generated robots.txt |
+
+---
+
+## G. Folder Structure
+
+> *Design rule: Opening any folder manually should feel natural and obvious. No cryptic names. Content maps to website sections.*
+
+### G1. Full Project Structure
+
+```
+kiddies-academy/
+├── public/
+│   ├── images/
+│   │   ├── hero/              ← hero-home.webp, hero-about.webp
+│   │   ├── gallery/           ← events-diwali.jpg, sports-day.jpg
+│   │   ├── facilities/
+│   │   │   ├── classroom-1.jpg
+│   │   │   ├── playground.jpg
+│   │   │   ├── library.jpg
+│   │   │   └── activity-room.jpg
+│   │   ├── events/
+│   │   │   ├── annual-day-2024.jpg
+│   │   │   └── sports-day-2024.jpg
+│   │   ├── programs/
+│   │   │   ├── playgroup.webp
+│   │   │   ├── nursery.webp
+│   │   │   └── primary.webp
+│   │   ├── team/              ← principal.jpg, teacher-priya.jpg
+│   │   ├── testimonials/      ← parent-sharma.jpg, parent-kapoor.jpg
+│   │   ├── activities/        ← dance.jpg, sports.jpg, art.jpg
+│   │   ├── og/                ← og-home.jpg, og-admissions.jpg (1200x630)
+│   │   └── brand/             ← logo.svg, logo-white.svg, favicon.ico
+│   ├── fonts/                 ← if self-hosting fonts
+│   ├── docs/                  ← brochure.pdf, fee-structure.pdf
+│   └── robots.txt             ← override if needed
+├── src/
+│   ├── pages/
+│   │   ├── index.astro
+│   │   ├── about.astro
+│   │   ├── admissions.astro
+│   │   ├── facilities.astro
+│   │   ├── activities.astro
+│   │   ├── gallery.astro
+│   │   ├── testimonials.astro
+│   │   ├── faq.astro
+│   │   ├── contact.astro
+│   │   ├── thank-you.astro
+│   │   ├── 404.astro
+│   │   ├── sitemap.xml.ts
+│   │   ├── robots.txt.ts
+│   │   ├── programs/
+│   │   │   ├── index.astro
+│   │   │   └── [slug].astro
+│   │   └── events/
+│   │       ├── index.astro
+│   │       └── [slug].astro
+│   ├── layouts/
+│   │   ├── BaseLayout.astro
+│   │   ├── PageLayout.astro
+│   │   └── BlogLayout.astro
+│   ├── components/
+│   │   ├── global/
+│   │   │   ├── Header.astro
+│   │   │   ├── Footer.astro
+│   │   │   ├── MobileMenu.astro
+│   │   │   ├── WhatsAppButton.astro
+│   │   │   ├── Breadcrumb.astro
+│   │   │   ├── SEO.astro
+│   │   │   └── CookieBanner.astro
+│   │   ├── sections/
+│   │   │   ├── Hero.astro
+│   │   │   ├── TrustStrip.astro
+│   │   │   ├── ProgrammeCards.astro
+│   │   │   ├── TestimonialCarousel.astro
+│   │   │   ├── EventsList.astro
+│   │   │   ├── GalleryGrid.astro
+│   │   │   ├── FacilityCards.astro
+│   │   │   ├── AdmissionSteps.astro
+│   │   │   ├── FAQAccordion.astro
+│   │   │   ├── CTABanner.astro
+│   │   │   ├── MapEmbed.astro
+│   │   │   ├── ContactForm.astro
+│   │   │   ├── TeamGrid.astro
+│   │   │   ├── DayTimeline.astro
+│   │   │   └── AchievementBadges.astro
+│   │   └── ui/
+│   │       ├── Button.astro
+│   │       ├── Badge.astro
+│   │       ├── Card.astro
+│   │       ├── Icon.astro
+│   │       ├── Image.astro
+│   │       ├── Section.astro
+│   │       └── SectionHeading.astro
+│   ├── data/
+│   │   ├── school.json
+│   │   ├── programs.json
+│   │   ├── events.json
+│   │   ├── gallery.json
+│   │   ├── testimonials.json
+│   │   ├── faqs.json
+│   │   ├── team.json
+│   │   ├── facilities.json
+│   │   ├── activities.json
+│   │   └── admissions.json
+│   ├── styles/
+│   │   ├── global.css
+│   │   ├── tokens.css         ← CSS custom properties / design tokens
+│   │   └── utilities.css
+│   ├── utils/
+│   │   ├── seo.ts             ← meta tag helpers
+│   │   ├── date.ts            ← date formatting
+│   │   ├── image.ts           ← image path helpers
+│   │   └── schema.ts          ← JSON-LD schema builders
+│   ├── types/
+│   │   ├── program.ts
+│   │   ├── event.ts
+│   │   ├── gallery.ts
+│   │   ├── testimonial.ts
+│   │   └── index.ts
+│   └── content/               ← for Markdown blog posts (Phase 2)
+│       └── blog/
+├── astro.config.mjs
+├── tailwind.config.mjs
+├── tsconfig.json
+├── .env                       ← GA4 ID, form endpoint, Maps key
+├── .env.example
+├── package.json
+└── README.md
+```
+
+### G2. Image Naming Rules
+
+- Use lowercase, hyphen-separated names.
+- Include section context in filename: `events/annual-day-2025.jpg`
+- Never rename files the school provides — place them as-is into the correct folder.
+- OG images must be exactly 1200×630px and placed in `public/images/og/`.
+- Brand assets go in `public/images/brand/` — `logo.svg`, `logo-white.svg`, `favicon.ico`.
+
+---
+
+## H. Data Model
+
+> *All data lives in `/src/data/*.json` in Phase 1. In Phase 2, replace the import with an API fetch call. Component code does not change.*
+
+### H1. school.json — School Identity
+
+```json
+{
+  "name": "Kiddies Academy",
+  "tagline": "Where Every Child's Story Begins",
+  "estYear": 2010,
+  "affiliation": "CBSE Board",
+  "studentCount": 850,
+  "phone": "+91-XXXXXXXXXX",
+  "altPhone": "+91-XXXXXXXXXX",
+  "email": "hello@kiddiesacademy.in",
+  "whatsapp": "91XXXXXXXXXX",
+  "address": { "street": "...", "city": "...", "state": "...", "pincode": "..." },
+  "mapEmbedUrl": "https://maps.google.com/...",
+  "officeHours": "Mon–Sat: 8:00 AM – 4:00 PM",
+  "social": { "instagram": "...", "facebook": "...", "youtube": "..." },
+  "admissionOpen": true,
+  "currentAcademicYear": "2025-26"
+}
+```
+
+### H2. programs.json — Programme Data
+
+```json
+[{
+  "slug": "nursery",
+  "name": "Nursery",
+  "ageRange": "3–4 years",
+  "tagline": "First steps into learning",
+  "description": "...",
+  "outcomes": ["..."],
+  "schedule": [{ "time": "8:00 AM", "activity": "Morning Circle" }],
+  "subjects": ["English", "Hindi", "Maths", "EVS", "Art"],
+  "heroImage": "/images/programs/nursery.webp",
+  "teacherQualification": "NTT / B.Ed. certified",
+  "color": "#52B788",
+  "icon": "star"
+}]
+```
+
+### H3. events.json — Events & News
+
+```json
+[{
+  "slug": "annual-day-2025",
+  "title": "Annual Day 2025 — Colours of India",
+  "date": "2025-02-15",
+  "time": "10:00 AM",
+  "location": "School Auditorium",
+  "description": "...",
+  "image": "/images/events/annual-day-2025.jpg",
+  "isPast": false,
+  "category": "cultural",
+  "featured": true
+}]
+```
+
+### H4. gallery.json — Gallery Items
+
+```json
+[{
+  "id": "gal-001",
+  "src": "/images/gallery/sports-day-2024.jpg",
+  "alt": "Students cheering during Sports Day 2024 at Kiddies Academy",
+  "category": "sports",
+  "year": 2024,
+  "caption": "Sports Day 2024 — Our little champions!"
+}]
+```
+
+### H5. testimonials.json — Parent Testimonials
+
+```json
+[{
+  "id": "t-001",
+  "parentName": "Priya Sharma",
+  "childClass": "LKG",
+  "rating": 5,
+  "quote": "Kiddies Academy changed our son completely...",
+  "photo": "/images/testimonials/parent-sharma.jpg",
+  "date": "2024-12",
+  "programSlug": "lkg",
+  "featured": true
+}]
+```
+
+### H6. Other Data Files
+
+| File | Schema |
+|---|---|
+| `faqs.json` | `{ id, question, answer, category }` |
+| `team.json` | `{ id, name, role, qualification, photo, bio, featured }` |
+| `facilities.json` | `{ id, name, description, features[], image, icon }` |
+| `activities.json` | `{ id, name, category, description, image, examples[] }` |
+| `admissions.json` | `{ steps[], eligibility[], documents[], importantDates[], feeNote }` |
+
+---
+
+## I. SEO Strategy
+
+### I1. Keyword Mapping
+
+| Page | Primary Keyword | Secondary Keywords |
+|---|---|---|
+| Home (/) | [City] nursery school | best school for kids [city], CBSE school [city] |
+| /about | Kiddies Academy [city] | trusted nursery school, experienced school teachers |
+| /programs/nursery | nursery school admission [city] | nursery curriculum India, playgroup near me |
+| /programs/lkg | LKG admission [city] | LKG class syllabus, kindergarten school |
+| /admissions | school admission 2025-26 [city] | nursery admission process India |
+| /facilities | school facilities [city] | safe classroom environment, smart classroom |
+| /gallery | Kiddies Academy photos | school life photos, annual day school [city] |
+| /contact | Kiddies Academy address | school near me, [pincode] school |
+
+### I2. Metadata Structure
+
+Every page has unique: `<title>`, `<meta name="description">`, canonical URL, Open Graph tags, Twitter Card tags.
+
+**Title Format:**
+- Home: "Kiddies Academy | Best Nursery & Primary School in [City]"
+- Interior: "[Page Name] | Kiddies Academy [City]"
+- Max 60 characters.
+
+**Description Format:**
+- Unique per page, 140–160 characters.
+- Include primary keyword, CTA snippet, location.
+- Example (Admissions): "Admissions open for 2025–26 at Kiddies Academy [City]. CBSE-affiliated. Apply for Playgroup to Grade V. Enquire today."
+
+### I3. Open Graph Tags
+
+| Tag | Value |
+|---|---|
+| `og:title` | Same as page `<title>` |
+| `og:description` | Same as meta description |
+| `og:image` | Page-specific 1200×630px image from `/images/og/` |
+| `og:url` | Full canonical URL |
+| `og:type` | "website" for all pages; "article" for blog posts |
+| `og:locale` | `en_IN` |
+| `og:site_name` | Kiddies Academy |
+
+### I4. JSON-LD Schema Markup
+
+| Schema | Applied On |
+|---|---|
+| `EducationalOrganization` | All pages via BaseLayout. Includes name, address, phone, URL, logo. |
+| `LocalBusiness` | Home and Contact pages. Includes geo coordinates, opening hours, price range. |
+| `FAQPage` | /faq and inline FAQ sections on Admissions. |
+| `Event` | Individual event pages (/events/[slug]). |
+| `BreadcrumbList` | All interior pages. |
+| `Course` | Individual programme pages (/programs/[slug]). |
+| `Review / AggregateRating` | /testimonials page. |
+
+### I5. Image Alt Text Strategy
+
+- Every `<img>` has a descriptive, keyword-rich `alt` attribute.
+- Formula: `[Action/Subject] + [Context] + [School Name] + [City]`
+- Example: "Children playing during Annual Day 2024 at Kiddies Academy, [City]"
+- Gallery alt text comes from `gallery.json` "alt" field.
+- Team photos: "Teacher [Name], [Role] at Kiddies Academy"
+- Facility photos: "[Facility Name] at Kiddies Academy [City]"
+
+### I6. Internal Linking Strategy
+
+- Home links to: all primary pages, top 3 programmes, gallery, testimonials, contact.
+- About links to: team, programmes, facilities, admissions.
+- Every programme page links to: Admissions, Related activities, Facilities, FAQs.
+- Admissions links to: individual programme pages, FAQ, Contact.
+- Footer includes links to all main pages on every page.
+
+### I7. Local SEO Strategy (India-Specific)
+
+- **Google Business Profile:** Set up and fully populate with school photos, hours, services.
+- **NAP consistency:** Name, Address, Phone identical across website, GBP, Justdial, Sulekha, UrbanPro.
+- **Local keywords:** Include city name, area name, pincode in meta descriptions and body copy.
+- **Reviews:** Encourage parents to leave Google reviews. Embed Google rating widget on site.
+- **Local backlinks:** Get listed on city parenting forums, school directories, JustDial, IndiaStudyChannel.
+- **Hindi micro-copy:** Use warmth phrases in Hindi in subheadings or captions for relatability.
+- **WhatsApp integration:** Indians trust WhatsApp — feature it prominently.
+
+### I8. Sitemap & Robots
+
+- `sitemap.xml`: Auto-generated by `@astrojs/sitemap`. Includes all pages with priority and changefreq.
+- **Priority:** Home = 1.0 | Core pages = 0.8 | Programme pages = 0.9 | Gallery, Events = 0.7 | Blog = 0.6
+- `robots.txt`: Allow all crawlers. Disallow `/thank-you`, `/404`, `/api/*`.
+- Submit sitemap to Google Search Console and Bing Webmaster Tools on launch day.
+
+---
+
+## J. Future Admin Panel Roadmap
+
+### J1. The Core Principle
+
+> *In Phase 1, components consume local JSON files. In Phase 2, those same components consume an API endpoint instead. The component template code does not change.*
+
+Every component accepts typed props — it does not care whether those props come from a local file or an API.
+
+### J2. Content Abstraction Pattern
+
+**Phase 1 — Static JSON:**
+
+```typescript
+// src/utils/data.ts — Phase 1
+import events from "../data/events.json";
+
+export async function getEvents() { return events; }
+export async function getGallery() { return gallery; }
+```
+
+**Phase 2 — API (Replace only this file):**
+
+```typescript
+// src/utils/data.ts — Phase 2 (only this changes)
+const CMS_URL = import.meta.env.CMS_API_URL;
+
+export async function getEvents() {
+  const res = await fetch(`${CMS_URL}/api/events`);
+  return res.json();
+}
+
+export async function getGallery() {
+  const res = await fetch(`${CMS_URL}/api/gallery`);
+  return res.json();
+}
+```
+
+### J3. Recommended CMS Options for Phase 2
+
+| CMS | Best For | Notes |
+|---|---|---|
+| **Directus** | Self-hosted, full control, REST+GraphQL | Best for Indian schools wanting to own their data |
+| **Sanity** | Real-time editing, visual studio, CDN | Generous free tier; GROQ query language |
+| **Strapi** | Open source, customisable, REST | Good for developers who want full control |
+| **Contentful** | Enterprise-grade, CDN, robust API | Paid; overkill for single school |
+| **Netlify CMS / Decap** | Git-based, no server, free | Good Phase 1.5 bridge — edits JSON via Git |
+
+### J4. Phase 2 Migration Steps
+
+1. Deploy chosen CMS (Directus recommended) on a VPS (DigitalOcean/Hetzner) or cloud-hosted Sanity.
+2. Migrate all JSON data into CMS collections via import script.
+3. Add Astro SSR adapter (`netlify` or `vercel`) to enable server-side rendering.
+4. Replace `data.ts` import functions with API fetch functions — no component changes needed.
+5. Enable ISR (Incremental Static Regeneration) for gallery, events, blog — 60-second stale-while-revalidate.
+6. Add admin authentication and CMS dashboard access for school staff.
+7. Test all pages, forms, and data flows.
+8. Deploy. Done — no frontend redesign required.
+
+### J5. Phase 2 Feature Additions
+
+- Parent Login Portal — fee receipts, circulars, attendance (requires auth).
+- Online Admission Form with Razorpay payment integration.
+- WhatsApp Business API — automated event reminders.
+- Email newsletter — new event/blog post notifications.
+- Blog/Articles section — Astro Content Collections from CMS.
+- Multi-branch support — `school.json` becomes multi-location API.
+
+---
+
+## K. SEO Checklist
+
+### K1. On-Page SEO — Per Page
+
+- [ ] Unique `<title>` tag (max 60 chars, includes keyword + brand)
+- [ ] Unique meta description (140–160 chars)
+- [ ] Canonical URL tag
+- [ ] H1 tag — one per page, includes primary keyword
+- [ ] H2–H4 tags — logical heading hierarchy
+- [ ] All images have descriptive alt text
+- [ ] Internal links to related pages
+- [ ] Keyword in first 100 words of body copy
+- [ ] Open Graph tags: title, description, image, URL, type, locale
+- [ ] Twitter Card tags
+- [ ] JSON-LD schema markup (page-appropriate type)
+- [ ] BreadcrumbList schema on interior pages
+
+### K2. Technical SEO
+
+- [ ] sitemap.xml auto-generated and submitted to GSC
+- [ ] robots.txt correctly configured
+- [ ] HTTPS enforced (Netlify/Vercel default)
+- [ ] No broken links (automated check via CI)
+- [ ] Page speed >= 90 mobile (verified via Lighthouse)
+- [ ] Core Web Vitals passing (LCP < 2.5s, CLS < 0.1, TBT < 200ms)
+- [ ] Mobile-friendly verified via Google Mobile-Friendly Test
+- [ ] No duplicate content (canonical tags on all paginated routes)
+- [ ] Image compression and WebP format
+- [ ] Lazy loading on all below-fold images
+- [ ] No render-blocking JS/CSS
+
+### K3. Local SEO — India
+
+- [ ] Google Business Profile created, verified, and fully filled
+- [ ] NAP identical on website, GBP, and all directories
+- [ ] City and area name in homepage H1 and meta description
+- [ ] LocalBusiness JSON-LD with geo coordinates
+- [ ] EducationalOrganization JSON-LD with full details
+- [ ] School listed on JustDial, Sulekha, UrbanPro, SchoolMyKids
+- [ ] Google Maps embed on Contact page
+- [ ] Reviews widget or rating display on site
+- [ ] City-specific landing page if serving multiple areas (Phase 2)
+
+---
+
+## L. MVP Checklist — Phase 1
+
+### L1. Design & Content
+
+- [ ] Brand kit ready: logo (SVG), colour palette, fonts loaded
+- [ ] All page wireframes approved by school
+- [ ] Real school photos collected and optimised (WebP)
+- [ ] All JSON data files filled: school, programs, events, gallery, testimonials, faqs, team, facilities
+- [ ] All page copy written and approved
+- [ ] Principal photo and message ready
+- [ ] Google Maps embed URL confirmed
+- [ ] Brochure PDF prepared for download link
+
+### L2. Pages Built
+
+- [ ] Home (/) — all 10 sections complete
+- [ ] /about — all sections complete
+- [ ] /programs — index and all 5 sub-programme pages
+- [ ] /admissions — process, form, dates, docs, FAQ
+- [ ] /facilities — all facility cards with photos
+- [ ] /activities — all category cards
+- [ ] /gallery — filterable grid with lightbox
+- [ ] /events — upcoming and past events
+- [ ] /testimonials — cards, ratings, video embeds
+- [ ] /faq — accordion with all categories
+- [ ] /contact — map, form, all contact details
+- [ ] /404 — branded not-found page
+- [ ] /thank-you — post-form confirmation
+
+### L3. Technical
+
+- [ ] Astro JS project initialised with TypeScript
+- [ ] Tailwind CSS configured with design tokens
+- [ ] All components built and tested
+- [ ] SEO component on all pages (meta, OG, JSON-LD)
+- [ ] Google Analytics 4 integrated (via Partytown for performance)
+- [ ] Microsoft Clarity integrated
+- [ ] Sitemap.xml auto-generated and verified
+- [ ] robots.txt verified
+- [ ] Forms connected to Netlify Forms or Formspree
+- [ ] WhatsApp floating button tested on Android and iOS
+- [ ] All images optimised (<300KB hero, <100KB cards)
+- [ ] Lighthouse score >= 90 mobile on all pages
+- [ ] WCAG 2.1 AA accessibility check passed
+- [ ] Cross-browser tested: Chrome, Safari, Firefox, Samsung Internet
+- [ ] Cross-device tested: iPhone, Android, tablet, desktop
+
+### L4. Launch
+
+- [ ] Domain configured and pointing to Netlify/Vercel
+- [ ] HTTPS enforced
+- [ ] Sitemap submitted to Google Search Console
+- [ ] Google Business Profile set up and linked to website
+- [ ] 404 page tested
+- [ ] All forms tested end-to-end
+- [ ] WhatsApp link tested
+- [ ] Brochure PDF download tested
+- [ ] Social media preview (OG image) tested via OpenGraph.xyz
+- [ ] School management walkthrough completed
+
+---
+
+## M. Phase 2 Checklist — Admin Panel
+
+### M1. Infrastructure
+
+- [ ] CMS selected and deployed (Directus / Sanity / Strapi)
+- [ ] All Phase 1 JSON data migrated into CMS collections
+- [ ] Astro SSR adapter added (netlify or vercel)
+- [ ] ISR configured for dynamic content pages
+- [ ] Environment variables set for CMS API URL and key
+- [ ] CMS behind authentication (staff only)
+
+### M2. Content Management
+
+- [ ] Events: Add/edit/delete events via CMS dashboard
+- [ ] Gallery: Upload photos, assign category and year
+- [ ] Testimonials: Add/edit/feature testimonials
+- [ ] Blog: Create and publish articles from CMS
+- [ ] Team: Update staff photos and bios
+- [ ] Admissions: Toggle admissions open/closed, update dates and fees
+- [ ] FAQ: Add/edit/reorder FAQ entries
+
+### M3. Feature Additions
+
+- [ ] Online admission form with Razorpay payment
+- [ ] Parent login portal
+- [ ] Fee receipt download
+- [ ] School circular/notice board (PDF uploads)
+- [ ] WhatsApp Business API integration for event reminders
+- [ ] Email newsletter subscription
+- [ ] Advanced analytics dashboard for school management
+- [ ] City/branch landing pages (if multi-branch)
+
+### M4. SEO Enhancements
+
+- [ ] Blog posts for long-tail keyword targeting
+- [ ] City-specific landing pages
+- [ ] Rich structured data for blog articles
+- [ ] Automated internal linking from blog to programmes
+
+---
+
+*Kiddies Academy — School Website PRD v1.0 | Implementation-ready. All sections defined. Phase 1 and Phase 2 scoped.*

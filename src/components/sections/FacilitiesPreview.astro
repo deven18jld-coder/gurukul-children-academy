@@ -1,0 +1,76 @@
+---
+import Container from '../ui/Container.astro';
+import imageManifest from '../../generated/image-manifest.json';
+
+interface Facility {
+  title: string;
+  description: string;
+  imageKey: string;
+}
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  facilities: Facility[];
+}
+
+const { 
+  title = "Designed for Safe and Inspiring Learning", 
+  subtitle = "Our campus is thoughtfully designed to provide a secure, engaging, and joyful environment for every child.",
+  facilities 
+} = Astro.props;
+
+// Type helper for the manifest
+const manifest = imageManifest as Record<string, any>;
+---
+
+<section class="py-20 md:py-28 bg-white relative">
+  <Container>
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-3xl md:text-4xl font-nunito font-bold text-primary mb-4">
+        {title}
+      </h2>
+      <p class="text-text/70 text-lg">
+        {subtitle}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {facilities.map((facility) => {
+        const imagePath = manifest[facility.imageKey];
+        
+        return (
+          <div class="group rounded-3xl overflow-hidden bg-background border border-primary/5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">
+            
+            <div class="relative aspect-[4/3] w-full overflow-hidden bg-soft-bg border-b border-primary/5">
+              {imagePath ? (
+                <img 
+                  src={imagePath.src} 
+                  alt={facility.title} 
+                  class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                  loading="lazy"
+                />
+              ) : (
+                <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-soft-bg to-white group-hover:scale-105 transition-transform duration-700">
+                  <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMSIgZmlsbD0iIzEyMzA0QSIgZmlsbC1vcGFjaXR5PSIwLjA1Ii8+PC9zdmc+')] opacity-50"></div>
+                  <div class="w-20 h-20 rounded-full bg-white/60 flex items-center justify-center text-primary/30 backdrop-blur-sm shadow-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                  </div>
+                </div>
+              )}
+            </div>
+            
+            <div class="p-8 flex flex-col flex-grow">
+              <h3 class="text-xl font-nunito font-bold text-primary mb-3">
+                {facility.title}
+              </h3>
+              <p class="text-text/70 leading-relaxed text-sm flex-grow">
+                {facility.description}
+              </p>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </Container>
+</section>

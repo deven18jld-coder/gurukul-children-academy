@@ -1,0 +1,49 @@
+---
+import Container from '../../ui/Container.astro';
+
+interface FAQ {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  faqs: FAQ[];
+}
+
+const { 
+  title = "Admissions FAQ",
+  subtitle = "Common questions asked by parents regarding the admission process.",
+  faqs
+} = Astro.props;
+---
+
+<section class="py-20 md:py-28 bg-white relative">
+  <Container>
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-3xl md:text-4xl font-nunito font-bold text-primary mb-4">
+        {title}
+      </h2>
+      <p class="text-text/70 text-lg">
+        {subtitle}
+      </p>
+    </div>
+
+    <div class="max-w-3xl mx-auto space-y-4">
+      {faqs.map((faq) => (
+        <details class="group bg-background rounded-2xl border border-primary/5 overflow-hidden [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex items-center justify-between p-6 cursor-pointer font-bold text-primary hover:text-secondary transition-colors">
+            {faq.question}
+            <span class="ml-4 flex-shrink-0 text-secondary transition-transform duration-300 group-open:rotate-180">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </summary>
+          <div class="p-6 pt-0 text-text/80 leading-relaxed border-t border-primary/5 mt-2 bg-white">
+            <p class="pt-4">{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </Container>
+</section>

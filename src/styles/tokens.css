@@ -1,0 +1,17 @@
+:root {
+  /* Colors */
+  --color-trust-blue: #2E86AB;
+  --color-warm-yellow: #F6AE2D;
+  --color-energy-orange: #F26419;
+  --color-success-green: #52B788;
+  --color-creative-purple: #845EC2;
+  --color-light-blue-tint: #F0F7FF;
+  --color-navy: #1A2340;
+  --color-white: #FFFFFF;
+  --color-gray: #6C757D;
+  --color-light-gray: #F5F5F5;
+
+  /* Fonts */
+  --font-nunito: 'Nunito', sans-serif;
+  --font-inter: 'Inter', sans-serif;
+}

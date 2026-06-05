@@ -1,0 +1,89 @@
+---
+import Container from '../ui/Container.astro';
+import imageManifest from '../../generated/image-manifest.json';
+
+interface Props {
+  name: string;
+  designation: string;
+  message: string;
+  imageKey?: string;
+  ctaHref?: string;
+  ctaLabel?: string;
+}
+
+const { 
+  name,
+  designation,
+  message,
+  imageKey,
+  ctaHref = "/about",
+  ctaLabel = "Read Full Message"
+} = Astro.props;
+
+// Type helper for the manifest
+const manifest = imageManifest as Record<string, any>;
+const imagePath = imageKey ? manifest[imageKey] : undefined;
+---
+
+<section class="py-20 md:py-28 bg-white relative">
+  <Container>
+    <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+      
+      <!-- Image / Fallback -->
+      <div class="w-full lg:w-5/12 relative">
+        <div class="absolute -inset-4 bg-soft-bg rounded-3xl -z-10 transform -rotate-3 transition-transform hover:rotate-0 duration-500"></div>
+        <div class="relative rounded-2xl overflow-hidden shadow-xl aspect-[4/5] bg-background border-4 border-white">
+          {imagePath ? (
+            <img 
+              src={imagePath.src} 
+              alt={name} 
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          ) : (
+            <div class="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-soft-bg to-background">
+              <div class="w-24 h-24 rounded-full bg-white/60 flex items-center justify-center text-primary/30 mb-4 shadow-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
+              <span class="text-primary/40 font-medium font-nunito text-sm uppercase tracking-widest">{designation}</span>
+            </div>
+          )}
+        </div>
+      </div>
+      
+      <!-- Content -->
+      <div class="w-full lg:w-7/12 flex flex-col items-center lg:items-start text-center lg:text-left">
+        <div class="inline-flex items-center gap-2 text-secondary font-bold uppercase tracking-widest text-sm mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>
+          Leadership
+        </div>
+        
+        <h2 class="text-3xl md:text-4xl font-nunito font-bold text-primary mb-8 relative">
+          A Message from our {designation}
+        </h2>
+        
+        <!-- Premium quote styling -->
+        <div class="relative">
+          <svg class="absolute -top-6 -left-8 md:-top-8 md:-left-12 w-16 md:w-20 h-16 md:h-20 text-soft-bg -z-10" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+            <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
+          </svg>
+          
+          <p class="text-text/80 text-lg md:text-xl leading-relaxed font-medium italic mb-8">
+            "{message}"
+          </p>
+        </div>
+        
+        <div class="mb-8">
+          <div class="font-nunito font-bold text-xl text-primary">{name}</div>
+          <div class="text-secondary font-medium">{designation}</div>
+        </div>
+        
+        <a href={ctaHref} class="inline-flex items-center text-primary font-bold hover:text-secondary transition-colors group">
+          {ctaLabel}
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 transform group-hover:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+      
+    </div>
+  </Container>
+</section>

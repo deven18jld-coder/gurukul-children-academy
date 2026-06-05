@@ -1,0 +1,44 @@
+---
+import Container from '../../ui/Container.astro';
+import { type LearningOutcome } from '../../../data/programs';
+
+interface Props {
+  outcomes: LearningOutcome[];
+  themeColor: 'primary' | 'secondary' | 'accent';
+}
+
+const { outcomes, themeColor } = Astro.props;
+
+const getIconColor = () => {
+  switch (themeColor) {
+    case 'secondary': return 'text-secondary';
+    case 'accent': return 'text-accent';
+    default: return 'text-primary';
+  }
+};
+---
+
+<section class="py-20 bg-background relative">
+  <Container>
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-3xl font-nunito font-bold text-primary mb-4">
+        Key Learning Outcomes
+      </h2>
+      <p class="text-text/70">What your child will achieve in this program.</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {outcomes.map((outcome, index) => (
+        <div class="bg-white rounded-2xl p-6 border border-primary/5 shadow-sm hover:-translate-y-1 transition-transform duration-300">
+          <div class="text-4xl font-serif text-black/5 font-bold mb-2 leading-none">0{index + 1}</div>
+          <h3 class={`text-lg font-nunito font-bold mb-3 ${getIconColor()}`}>
+            {outcome.title}
+          </h3>
+          <p class="text-text/70 text-sm leading-relaxed">
+            {outcome.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </Container>
+</section>

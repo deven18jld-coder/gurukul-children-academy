@@ -1,0 +1,60 @@
+---
+import Container from '../../ui/Container.astro';
+
+interface TimelineItem {
+  year: string;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  title?: string;
+  items: TimelineItem[];
+}
+
+const { 
+  title = "Our Journey",
+  items
+} = Astro.props;
+---
+
+<section class="py-20 md:py-28 bg-white relative">
+  <Container>
+    <div class="text-center max-w-3xl mx-auto mb-20">
+      <h2 class="text-3xl md:text-4xl font-nunito font-bold text-primary mb-4">
+        {title}
+      </h2>
+      <div class="w-24 h-1 bg-accent mx-auto rounded-full"></div>
+    </div>
+
+    <div class="max-w-4xl mx-auto relative">
+      <!-- Vertical line -->
+      <div class="absolute left-[20px] md:left-1/2 top-0 bottom-0 w-1 bg-soft-bg transform md:-translate-x-1/2 rounded-full hidden sm:block"></div>
+      
+      <div class="space-y-12 md:space-y-20">
+        {items.map((item, index) => {
+          const isEven = index % 2 === 0;
+          
+          return (
+            <div class={`relative flex flex-col sm:flex-row items-start sm:items-center ${isEven ? 'md:flex-row-reverse' : ''}`}>
+              <!-- Dot -->
+              <div class="hidden sm:flex absolute left-[20px] md:left-1/2 w-10 h-10 rounded-full bg-white border-4 border-primary shadow-md items-center justify-center transform -translate-x-1/2 z-10">
+                <div class="w-3 h-3 rounded-full bg-accent"></div>
+              </div>
+              
+              <!-- Content Box -->
+              <div class={`w-full sm:w-[calc(100%-60px)] md:w-[calc(50%-40px)] ${isEven ? 'md:pr-10' : 'md:pl-10'} ml-12 sm:ml-0`}>
+                <div class="bg-background rounded-3xl p-8 border border-primary/5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                  <div class="text-secondary font-bold text-xl mb-2">{item.year}</div>
+                  <h3 class="text-2xl font-nunito font-bold text-primary mb-3">{item.title}</h3>
+                  <p class="text-text/70 leading-relaxed">{item.description}</p>
+                </div>
+              </div>
+              
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </Container>
+</section>

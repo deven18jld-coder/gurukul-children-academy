@@ -1,0 +1,43 @@
+---
+import Container from '../../ui/Container.astro';
+
+interface SafetyFeature {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+interface Props {
+  features: SafetyFeature[];
+}
+
+const { features } = Astro.props;
+---
+
+<section class="py-20 md:py-28 bg-primary text-white relative">
+  <Container>
+    <div class="max-w-4xl mx-auto text-center mb-16">
+      <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-accent text-primary mb-6 shadow-lg shadow-accent/20">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <h2 class="text-3xl md:text-4xl font-nunito font-bold mb-6">
+        Uncompromising Safety & Security
+      </h2>
+      <p class="text-lg text-white/80 leading-relaxed max-w-2xl mx-auto">
+        Your child's safety is our paramount concern. Our campus is equipped with comprehensive security measures to ensure peace of mind for parents.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
+      {features.map(feature => (
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-sm hover:bg-white/10 transition-colors">
+          <div class="text-accent mb-4">
+            <Fragment set:html={feature.icon} />
+          </div>
+          <h3 class="text-xl font-bold mb-3">{feature.title}</h3>
+          <p class="text-white/70 text-sm leading-relaxed" set:html={feature.description} />
+        </div>
+      ))}
+    </div>
+  </Container>
+</section>

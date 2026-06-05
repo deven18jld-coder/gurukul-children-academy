@@ -1,0 +1,54 @@
+---
+import Container from '../ui/Container.astro';
+
+interface ReasonItem {
+  title: string;
+  description: string;
+  icon?: string;
+}
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  items: ReasonItem[];
+}
+
+const { 
+  title = "Why Choose Kiddies Academy?", 
+  subtitle = "We provide a safe, nurturing environment where every child can discover their potential.",
+  items 
+} = Astro.props;
+---
+
+<section class="py-20 md:py-28 bg-white relative">
+  <Container>
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-3xl md:text-4xl font-nunito font-bold text-primary mb-4">
+        {title}
+      </h2>
+      <p class="text-text/70 text-lg">
+        {subtitle}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {items.map((item) => (
+        <div class="bg-background rounded-3xl p-8 border border-primary/5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+          <div class="w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-primary mb-6 shadow-sm group-hover:scale-110 group-hover:text-secondary transition-all duration-300">
+            {item.icon ? (
+              <Fragment set:html={item.icon} />
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+            )}
+          </div>
+          <h3 class="text-xl font-nunito font-bold text-primary mb-3">
+            {item.title}
+          </h3>
+          <p class="text-text/80 leading-relaxed">
+            {item.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </Container>
+</section>

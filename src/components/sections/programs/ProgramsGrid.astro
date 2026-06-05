@@ -1,0 +1,56 @@
+---
+import Container from '../../ui/Container.astro';
+import { type Program } from '../../../data/programs';
+
+interface Props {
+  programs: Program[];
+}
+
+const { programs } = Astro.props;
+
+const getBadgeClasses = (theme: string) => {
+  switch (theme) {
+    case 'secondary': return 'bg-secondary/10 text-secondary';
+    case 'accent': return 'bg-accent/15 text-accent';
+    default: return 'bg-primary/10 text-primary';
+  }
+};
+
+const getBorderClasses = (theme: string) => {
+  switch (theme) {
+    case 'secondary': return 'group-hover:border-secondary/30';
+    case 'accent': return 'group-hover:border-accent/30';
+    default: return 'group-hover:border-primary/30';
+  }
+};
+---
+
+<section class="py-20 md:py-28 bg-background relative">
+  <Container>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {programs.map((program) => (
+        <a href={`/programs/${program.slug}`} class={`bg-white rounded-3xl p-8 border border-primary/5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full group ${getBorderClasses(program.themeColor)}`}>
+          
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="text-3xl font-nunito font-bold text-primary">
+              {program.name}
+            </h3>
+            <div class={`inline-flex items-center px-3 py-1 rounded-full text-xs font-bold ${getBadgeClasses(program.themeColor)}`}>
+              Age {program.ageRange}
+            </div>
+          </div>
+          
+          <p class="text-text/70 text-base leading-relaxed mb-8 flex-grow">
+            {program.shortDescription}
+          </p>
+          
+          <div class="flex items-center text-primary font-bold text-sm mt-auto group-hover:text-secondary transition-colors">
+            Explore Program
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 group-hover:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+          
+        </a>
+      ))}
+    </div>
+  </Container>
+</section>

@@ -1,0 +1,57 @@
+export const contactData = {
+  schoolName: "Kiddies Academy",
+  establishedYear: "2015",
+  board: "State Board / CBSE",
+  classesOffered: "Playgroup to Grade 5",
+  
+  phone: {
+    display: "+91 98765 43210",
+    value: "tel:+919876543210"
+  },
+  whatsapp: {
+    display: "+91 98765 43210",
+    value: "https://wa.me/919876543210"
+  },
+  email: {
+    display: "admissions@kiddiesacademy.edu",
+    value: "mailto:admissions@kiddiesacademy.edu"
+  },
+  
+  address: {
+    street: "123 Education Lane, Knowledge Park",
+    city: "Bangalore",
+    state: "Karnataka",
+    pincode: "560001",
+    full: "123 Education Lane, Knowledge Park, Bangalore, Karnataka 560001"
+  },
+  
+  timings: {
+    campus: "Monday to Saturday, 8:00 AM - 4:00 PM",
+    office: "Monday to Saturday, 8:30 AM - 3:30 PM",
+    admissions: "Monday to Friday, 9:00 AM - 2:00 PM (By appointment on Saturdays)"
+  },
+  
+  map: {
+    url: "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent("123 Education Lane, Knowledge Park, Bangalore, Karnataka 560001"),
+    iframeSrc: "" // Placeholder for future Google Maps iframe embed
+  }
+};
+
+export const contactFaqs = [
+  {
+    question: "What is the best time to visit the campus?",
+    answer: "The ideal time to visit the campus is between 9:00 AM and 11:30 AM on weekdays. This allows you to see our classes in action without disrupting the daily routine."
+  },
+  {
+    question: "Do I need to schedule an appointment before visiting?",
+    answer: "While walk-ins are welcome, we highly recommend scheduling an appointment. This ensures that our admissions counselor is available to give you a dedicated, uninterrupted tour of the facilities."
+  },
+  {
+    question: "Can I call the school on weekends?",
+    answer: "Our office is open on Saturdays from 8:30 AM to 3:30 PM. We are closed on Sundays and public holidays."
+  },
+  {
+    question: "Who should I contact for fee-related queries?",
+    answer: "You can reach out to our accounts department directly by calling our main line and selecting extension 2, or by emailing accounts@kiddiesacademy.edu."
+  }
+];

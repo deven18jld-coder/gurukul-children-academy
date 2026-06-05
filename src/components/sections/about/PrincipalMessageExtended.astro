@@ -1,0 +1,92 @@
+---
+import Container from '../../ui/Container.astro';
+import imageManifest from '../../../generated/image-manifest.json';
+
+interface Props {
+  name: string;
+  designation: string;
+  messageParagraphs: string[];
+  imageKey?: string;
+  signature?: string;
+}
+
+const { 
+  name,
+  designation,
+  messageParagraphs,
+  imageKey,
+  signature
+} = Astro.props;
+
+// Type helper for the manifest
+const manifest = imageManifest as Record<string, any>;
+const imagePath = imageKey ? manifest[imageKey] : undefined;
+---
+
+<section class="py-20 md:py-32 bg-white relative border-t border-primary/5">
+  <Container>
+    <div class="flex flex-col lg:flex-row gap-12 lg:gap-20">
+      
+      <!-- Image / Fallback -->
+      <div class="w-full lg:w-4/12 relative">
+        <div class="sticky top-24">
+          <div class="absolute -inset-4 bg-soft-bg rounded-3xl -z-10 transform -rotate-2"></div>
+          <div class="relative rounded-2xl overflow-hidden shadow-xl aspect-[3/4] bg-background border-4 border-white">
+            {imagePath ? (
+              <img 
+                src={imagePath.src} 
+                alt={name} 
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+            ) : (
+              <div class="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-soft-bg to-background">
+                <div class="w-24 h-24 rounded-full bg-white/60 flex items-center justify-center text-primary/30 mb-4 shadow-sm">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </div>
+                <span class="text-primary/40 font-medium font-nunito text-sm uppercase tracking-widest">{designation}</span>
+              </div>
+            )}
+          </div>
+          
+          <div class="mt-8 text-center lg:text-left hidden lg:block">
+            <div class="font-nunito font-bold text-2xl text-primary">{name}</div>
+            <div class="text-secondary font-medium">{designation}</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Editorial Content -->
+      <div class="w-full lg:w-8/12">
+        <div class="inline-flex items-center gap-2 text-secondary font-bold uppercase tracking-widest text-sm mb-6">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          From the Desk
+        </div>
+        
+        <h2 class="text-3xl md:text-5xl font-nunito font-bold text-primary mb-10 leading-tight relative">
+          Welcome to a Place Where <span class="text-secondary">Every Child Matters</span>.
+        </h2>
+        
+        <div class="prose prose-lg prose-p:text-text/80 prose-p:leading-relaxed prose-p:mb-6 max-w-none">
+          {messageParagraphs.map((paragraph, index) => (
+            <p class={index === 0 ? "text-xl font-medium text-text/90 leading-relaxed" : ""} set:html={paragraph} />
+          ))}
+        </div>
+        
+        <div class="mt-12 pt-8 border-t border-primary/10">
+          <div class="lg:hidden mb-4 text-center sm:text-left">
+            <div class="font-nunito font-bold text-2xl text-primary">{name}</div>
+            <div class="text-secondary font-medium">{designation}</div>
+          </div>
+          
+          {signature && (
+            <div class="font-serif italic text-3xl text-primary/60 mt-4 text-center sm:text-left">
+              {signature}
+            </div>
+          )}
+        </div>
+      </div>
+      
+    </div>
+  </Container>
+</section>

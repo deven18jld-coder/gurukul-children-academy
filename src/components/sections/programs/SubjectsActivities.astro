@@ -1,0 +1,33 @@
+---
+import Container from '../../ui/Container.astro';
+import { type Subject } from '../../../data/programs';
+
+interface Props {
+  subjects: Subject[];
+}
+
+const { subjects } = Astro.props;
+---
+
+<section class="py-20 bg-soft-bg relative">
+  <Container>
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-3xl font-nunito font-bold text-primary mb-4">
+        Core Subjects & Activities
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+      {subjects.map((subject) => (
+        <div class="bg-white rounded-2xl p-6 text-center border border-primary/5 hover:shadow-md transition-shadow duration-300">
+          <div class="w-12 h-12 mx-auto rounded-full bg-background flex items-center justify-center text-secondary mb-4">
+            <Fragment set:html={subject.icon} />
+          </div>
+          <h3 class="font-bold text-primary text-sm md:text-base">
+            {subject.name}
+          </h3>
+        </div>
+      ))}
+    </div>
+  </Container>
+</section>

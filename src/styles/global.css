@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #12304A;
+  --color-secondary: #2F6F8F;
+  --color-accent: #D6A65A;
+  --color-background: #F7F3EC;
+  --color-text: #1E293B;
+  --color-soft-bg: #EAF2F6;
+
+  --font-nunito: 'Nunito', sans-serif;
+  --font-inter: 'Inter', sans-serif;
+}
+
+@layer base {
+  body {
+    @apply text-text bg-background font-inter;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-nunito font-bold text-primary;
+  }
+}

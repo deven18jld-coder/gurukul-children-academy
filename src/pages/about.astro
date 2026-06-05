@@ -1,0 +1,154 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import AboutHero from '../components/sections/about/AboutHero.astro';
+import OurStory from '../components/sections/about/OurStory.astro';
+import VisionMission from '../components/sections/about/VisionMission.astro';
+import CoreValues from '../components/sections/about/CoreValues.astro';
+import PrincipalMessageExtended from '../components/sections/about/PrincipalMessageExtended.astro';
+import MeetTeachers from '../components/sections/about/MeetTeachers.astro';
+import Achievements from '../components/sections/about/Achievements.astro';
+import AdmissionsCTA from '../components/sections/AdmissionsCTA.astro';
+
+const storyItems = [
+  {
+    year: "2015",
+    title: "Our Foundation",
+    description: "Kiddies Academy was established with a small batch of 20 students in a single building, driven by a passion for early childhood education."
+  },
+  {
+    year: "2018",
+    title: "Campus Expansion",
+    description: "Added our dedicated Primary Wing and outdoor sports facilities to accommodate our growing family of 150+ students."
+  },
+  {
+    year: "2021",
+    title: "Digital Integration",
+    description: "Introduced smart classrooms and interactive learning tools to blend traditional values with modern educational needs."
+  },
+  {
+    year: "2024",
+    title: "Award of Excellence",
+    description: "Recognized as the 'Best Emerging Primary School' in the district for our holistic development approach and academic results."
+  }
+];
+
+const coreValues = [
+  {
+    title: "Respect",
+    description: "Treating everyone with dignity and valuing diverse perspectives in our community.",
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9 9 0 0 0 9-9H3a9 9 0 0 0 9 9Z"/><path d="M12 3a9 9 0 0 0 9 9H3a9 9 0 0 0 9-9Z"/></svg>'
+  },
+  {
+    title: "Creativity",
+    description: "Encouraging imaginative thinking and innovative problem-solving in every subject.",
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>'
+  },
+  {
+    title: "Integrity",
+    description: "Fostering honesty, strong moral principles, and accountability in our students.",
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><path d="M9 12h6"/><path d="M12 9v6"/></svg>'
+  },
+  {
+    title: "Excellence",
+    description: "Striving for the highest standards in academics, sports, and personal growth.",
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>'
+  },
+  {
+    title: "Confidence",
+    description: "Building self-assurance so children can face challenges with courage and resilience.",
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>'
+  },
+  {
+    title: "Compassion",
+    description: "Teaching empathy, kindness, and a sense of responsibility towards others.",
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>'
+  }
+];
+
+const teacherItems = [
+  {
+    name: "Mrs. Ananya Patel",
+    role: "Head of Primary",
+    qualification: "M.Ed, B.Sc",
+    imageKey: "team/teacher-1"
+  },
+  {
+    name: "Ms. Sarah Jones",
+    role: "Early Years Coordinator",
+    qualification: "B.Ed, Child Psychology",
+    imageKey: "team/teacher-2"
+  },
+  {
+    name: "Mr. David Kumar",
+    role: "Mathematics Lead",
+    qualification: "M.Sc Mathematics, B.Ed",
+    imageKey: "team/teacher-3"
+  },
+  {
+    name: "Mrs. Priya Reddy",
+    role: "Language Arts",
+    qualification: "MA English Literature",
+    imageKey: "team/teacher-4"
+  }
+];
+
+const achievementItems = [
+  {
+    title: "Experienced Faculty",
+    value: "25+",
+    description: "Certified and passionate educators."
+  },
+  {
+    title: "Safe Campus",
+    value: "100%",
+    description: "CCTV monitored secure premises."
+  },
+  {
+    title: "Happy Students",
+    value: "450+",
+    description: "Learning in a joyful environment."
+  },
+  {
+    title: "Academic Excellence",
+    value: "10yrs",
+    description: "Of outstanding educational results."
+  }
+];
+
+const principalMessageParagraphs = [
+  "When we started Kiddies Academy, our goal was simple: to create a school that we would want our own children to attend. A place where curiosity is celebrated, where mistakes are seen as learning opportunities, and where every child's unique potential is nurtured.",
+  "Over the years, the educational landscape has changed tremendously. Yet, our core philosophy remains untouched. We believe that true education goes far beyond textbooks. It happens on the playground, during art class, and in those quiet moments of discovery in the library.",
+  "Our dedicated team of educators doesn't just teach; they inspire. They work tirelessly to create an environment that feels like a second home, ensuring that your child's emotional and social well-being is given as much importance as their academic progress.",
+  "I invite you to <a href='/facilities' class='text-secondary font-bold hover:underline'>explore our campus</a>, meet our wonderful teachers, and see for yourself the joy that fills our classrooms every day."
+];
+---
+
+<PageLayout 
+  title="About Us - Kiddies Academy" 
+  description="Learn about our story, vision, core values, and the dedicated team that makes Kiddies Academy a wonderful place to learn."
+>
+  <AboutHero />
+  
+  <OurStory items={storyItems} />
+  
+  <VisionMission 
+    visionText="To be a beacon of excellence in early childhood and <a href='/programs/primary' class='text-secondary hover:underline'>primary education</a>, nurturing confident, compassionate, and creative global citizens."
+    missionText="To provide a safe, joyful, and stimulating environment that fosters holistic development, critical thinking, and a lifelong love for learning in every child."
+  />
+  
+  <CoreValues items={coreValues} />
+  
+  <PrincipalMessageExtended 
+    name="Dr. Sarah Johnson"
+    designation="Principal & Founder"
+    messageParagraphs={principalMessageParagraphs}
+    signature="Dr. Sarah Johnson"
+  />
+  
+  <MeetTeachers teachers={teacherItems} />
+  
+  <Achievements items={achievementItems} />
+  
+  <AdmissionsCTA />
+
+</PageLayout>

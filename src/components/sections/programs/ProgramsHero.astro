@@ -1,0 +1,37 @@
+---
+import Container from '../../ui/Container.astro';
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+}
+
+const { 
+  title = "Our Learning Programs", 
+  subtitle = "From their first steps in a classroom to primary school graduation, discover how our age-appropriate programs nurture every stage of your child's development."
+} = Astro.props;
+---
+
+<section class="py-20 md:py-32 bg-soft-bg relative overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute -top-[20%] -left-[10%] w-[50%] h-[100%] bg-primary/5 rounded-full blur-[100px]"></div>
+    <div class="absolute bottom-[10%] -right-[10%] w-[40%] h-[80%] bg-white/60 rounded-full blur-[80px]"></div>
+  </div>
+
+  <Container class="relative z-10">
+    <div class="text-center max-w-4xl mx-auto flex flex-col items-center">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white text-secondary text-sm font-bold mb-6 shadow-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>
+        Academics
+      </div>
+      
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-nunito font-bold text-primary mb-8 leading-tight">
+        {title}
+      </h1>
+      
+      <p class="text-lg md:text-xl text-text/80 max-w-2xl font-medium leading-relaxed">
+        {subtitle}
+      </p>
+    </div>
+  </Container>
+</section>

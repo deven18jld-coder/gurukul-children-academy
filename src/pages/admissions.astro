@@ -1,0 +1,175 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import AdmissionsHero from '../components/sections/admissions/AdmissionsHero.astro';
+import AdmissionsStatus from '../components/sections/admissions/AdmissionsStatus.astro';
+import EligibilityPrograms from '../components/sections/admissions/EligibilityPrograms.astro';
+import AdmissionProcess from '../components/sections/admissions/AdmissionProcess.astro';
+import RequiredDocuments from '../components/sections/admissions/RequiredDocuments.astro';
+import ImportantDates from '../components/sections/admissions/ImportantDates.astro';
+import AdmissionsFAQ from '../components/sections/admissions/AdmissionsFAQ.astro';
+import AdmissionsForm from '../components/sections/admissions/AdmissionsForm.astro';
+import AdmissionsCTA from '../components/sections/AdmissionsCTA.astro';
+
+const programs = [
+  {
+    name: "Playgroup",
+    ageRange: "2–3 years",
+    cutOffDate: "March 31st",
+    summary: "A gentle introduction to school life focusing on socialization, sensory play, and early language development."
+  },
+  {
+    name: "Nursery",
+    ageRange: "3–4 years",
+    cutOffDate: "March 31st",
+    summary: "Building confidence and essential motor skills through guided play-based learning and creative activities."
+  },
+  {
+    name: "LKG",
+    ageRange: "4–5 years",
+    cutOffDate: "March 31st",
+    summary: "Developing foundational literacy, numeracy, and cognitive problem-solving skills in a structured environment."
+  },
+  {
+    name: "UKG",
+    ageRange: "5–6 years",
+    cutOffDate: "March 31st",
+    summary: "Preparing for primary school success with advanced phonics, basic math concepts, and independent learning."
+  },
+  {
+    name: "Primary (Grades 1-5)",
+    ageRange: "6–11 years",
+    cutOffDate: "March 31st",
+    summary: "Fostering independent thinking, strong academics, and character development through a comprehensive curriculum."
+  }
+];
+
+const processSteps = [
+  {
+    title: "Submit Enquiry",
+    description: "Fill out our simple online enquiry form or visit the school office to register your interest.",
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>'
+  },
+  {
+    title: "Schedule Visit",
+    description: "Take a guided tour of our campus, see our classrooms in action, and meet our educators.",
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>'
+  },
+  {
+    title: "Interaction",
+    description: "A brief, friendly interaction with the Principal and class teacher to understand your child's needs.",
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>'
+  },
+  {
+    title: "Enrollment",
+    description: "Submit required documents and complete the fee payment to confirm your child's admission.",
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>'
+  }
+];
+
+const requiredDocuments = [
+  {
+    title: "Birth Certificate",
+    description: "Copy of the official Birth Certificate issued by the Municipal Corporation.",
+    required: true
+  },
+  {
+    title: "Aadhaar Card",
+    description: "Copy of the child's and parents' Aadhaar cards for identity verification.",
+    required: true
+  },
+  {
+    title: "Passport Photos",
+    description: "4 recent passport-size photographs of the child and 2 of each parent.",
+    required: true
+  },
+  {
+    title: "Transfer Certificate",
+    description: "Original TC from the previous school (Applicable for Grade 1 and above).",
+    required: false
+  },
+  {
+    title: "Medical Certificate",
+    description: "Basic fitness certificate and immunization record from a registered pediatrician.",
+    required: true
+  },
+  {
+    title: "Previous Report Card",
+    description: "Copy of the final report card from the previous academic year (if applicable).",
+    required: false
+  }
+];
+
+const importantDates = [
+  {
+    date: "November 15, 2024",
+    title: "Admissions Open",
+    description: "Enquiry and application forms become available online and at the school office.",
+    isPast: true
+  },
+  {
+    date: "January 31, 2025",
+    title: "First Merit List Announcement",
+    description: "Notification for the first batch of selected candidates."
+  },
+  {
+    date: "February 15, 2025",
+    title: "Last Date for Fee Payment",
+    description: "Deadline to secure seats for the first merit list."
+  },
+  {
+    date: "April 05, 2025",
+    title: "Academic Session Begins",
+    description: "Welcome day and orientation for the new academic year 2025-26."
+  }
+];
+
+const faqs = [
+  {
+    question: "What is the minimum age for Playgroup admission?",
+    answer: "For Playgroup, the child must be 2 years old by March 31st of the academic year they are seeking admission for."
+  },
+  {
+    question: "Is there an entrance exam?",
+    answer: "No, we do not conduct formal entrance exams for early years (Playgroup to UKG). Admission is based on a friendly interaction. For Primary grades, a basic proficiency assessment in English and Math may be conducted."
+  },
+  {
+    question: "Do you provide transport facilities?",
+    answer: "Yes, we provide safe and secure transport facilities covering a radius of 10km around the school. All our buses are air-conditioned and equipped with GPS tracking and female attendants."
+  },
+  {
+    question: "What is the teacher-student ratio?",
+    answer: "We maintain a strict ratio to ensure personalized attention. For Pre-primary it is 1:15 (along with a support staff), and for Primary grades, it is 1:25."
+  },
+  {
+    question: "Are mid-term admissions accepted?",
+    answer: "Mid-term admissions are subject to the availability of seats in the respective grade. Parents transferring from other cities are given preference."
+  }
+];
+---
+
+<PageLayout 
+  title="Admissions - Kiddies Academy" 
+  description="Begin your child's educational journey with us. Learn about our admission process, eligibility criteria, and enrollment details."
+>
+  <AdmissionsHero />
+  
+  <AdmissionsStatus 
+    status="open" 
+    academicYear="2025-26" 
+  />
+  
+  <EligibilityPrograms programs={programs} />
+  
+  <AdmissionProcess steps={processSteps} />
+  
+  <RequiredDocuments documents={requiredDocuments} />
+  
+  <ImportantDates dates={importantDates} />
+  
+  <AdmissionsFAQ faqs={faqs} />
+  
+  <AdmissionsForm />
+  
+  <AdmissionsCTA />
+
+</PageLayout>

@@ -1,0 +1,168 @@
+---
+import Container from '../ui/Container.astro';
+
+const currentPath = Astro.url.pathname;
+
+const navLinks = [
+  { name: 'Home', path: '/' },
+  { name: 'About', path: '/about' },
+  { name: 'Admissions', path: '/admissions' },
+  { name: 'Programs', path: '/programs' },
+  { name: 'Gallery', path: '/gallery' },
+  { name: 'Facilities', path: '/facilities' },
+  { name: 'Contact', path: '/contact' },
+];
+
+function isActive(path: string) {
+  if (path === '/') return currentPath === '/';
+  return currentPath.startsWith(path);
+}
+---
+
+<header class="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm relative">
+  <Container class="flex items-center justify-between h-16 md:h-20">
+    <a href="/" class="flex items-center space-x-2 group">
+      <div class="w-8 h-8 rounded bg-primary flex items-center justify-center text-white font-bold group-hover:bg-secondary transition-colors duration-300">K</div>
+      <span class="text-xl font-nunito font-bold text-primary">Kiddies Academy</span>
+    </a>
+    
+    <!-- Desktop Navigation -->
+    <nav class="hidden lg:flex items-center space-x-6">
+      {navLinks.map((link) => (
+        <a 
+          href={link.path} 
+          class={`text-sm font-medium transition-colors relative ${isActive(link.path) ? 'text-secondary font-bold' : 'text-primary hover:text-secondary'}`}
+        >
+          {link.name}
+          {isActive(link.path) && (
+            <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-secondary rounded-full" />
+          )}
+        </a>
+      ))}
+    </nav>
+    
+    <div class="hidden lg:block">
+      <a href="/admissions#admissions-form" class="bg-primary text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-md hover:shadow-lg hover:bg-primary/90 hover:-translate-y-0.5 transition-all duration-300">
+        Enquire Now
+      </a>
+    </div>
+    
+    <!-- Mobile menu button -->
+    <button id="mobile-menu-btn" class="lg:hidden p-2 text-primary focus:outline-none" aria-label="Open menu">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+  </Container>
+
+  <!-- Mobile Menu Drawer -->
+  <div id="mobile-menu" class="fixed inset-0 z-[60] hidden" aria-modal="true" role="dialog">
+    <!-- Overlay -->
+    <div id="mobile-overlay" class="absolute inset-0 bg-black/40 backdrop-blur-sm opacity-0 transition-opacity duration-300 cursor-pointer"></div>
+    
+    <!-- Drawer -->
+    <div id="mobile-drawer" class="absolute top-0 right-0 bottom-0 w-[280px] sm:w-[320px] bg-white shadow-2xl transform translate-x-full transition-transform duration-300 ease-out flex flex-col">
+      
+      <div class="flex items-center justify-between p-5 border-b border-gray-100">
+        <div class="flex items-center space-x-2">
+          <div class="w-8 h-8 rounded bg-primary flex items-center justify-center text-white font-bold">K</div>
+          <span class="text-lg font-nunito font-bold text-primary">Menu</span>
+        </div>
+        <button id="close-menu-btn" class="p-2 text-gray-500 hover:text-primary focus:outline-none bg-gray-50 rounded-full" aria-label="Close menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      
+      <nav class="flex-grow overflow-y-auto py-4 px-4 space-y-1">
+        {navLinks.map((link) => (
+          <a 
+            href={link.path} 
+            class={`mobile-link block px-4 py-3 rounded-xl text-base font-bold transition-colors ${isActive(link.path) ? 'bg-soft-bg text-secondary' : 'text-gray-700 hover:bg-gray-50 hover:text-primary'}`}
+          >
+            {link.name}
+          </a>
+        ))}
+      </nav>
+      
+      <div class="p-5 border-t border-gray-100 bg-gray-50 mt-auto">
+        <a href="/admissions#admissions-form" class="mobile-link w-full inline-flex items-center justify-center bg-primary text-white px-6 py-3.5 rounded-xl font-bold shadow-md hover:bg-primary/90 transition-colors duration-300">
+          Enquire Now
+        </a>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+<script>
+  // Ensure the script runs after Astro page transitions or direct loads
+  function setupMobileMenu() {
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const closeMenuBtn = document.getElementById('close-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const overlay = document.getElementById('mobile-overlay');
+    const drawer = document.getElementById('mobile-drawer');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    if (!mobileMenuBtn || !mobileMenu || !overlay || !drawer) return;
+
+    let isMenuOpen = false;
+
+    function openMenu() {
+      if (isMenuOpen) return;
+      isMenuOpen = true;
+      
+      mobileMenu.classList.remove('hidden');
+      
+      // Use requestAnimationFrame for smooth transition
+      requestAnimationFrame(() => {
+        overlay.classList.remove('opacity-0');
+        drawer.classList.remove('translate-x-full');
+      });
+      
+      document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    }
+
+    function closeMenu() {
+      if (!isMenuOpen) return;
+      isMenuOpen = false;
+      
+      overlay.classList.add('opacity-0');
+      drawer.classList.add('translate-x-full');
+      
+      // Wait for animation to finish before hiding
+      setTimeout(() => {
+        mobileMenu.classList.add('hidden');
+        document.body.style.overflow = '';
+      }, 300);
+    }
+
+    // Toggle logic for accessibility
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === 'Escape' && isMenuOpen) {
+        closeMenu();
+      }
+    }
+
+    // Attach event listeners
+    mobileMenuBtn.addEventListener('click', openMenu);
+    closeMenuBtn?.addEventListener('click', closeMenu);
+    overlay.addEventListener('click', closeMenu);
+    document.addEventListener('keydown', handleKeyDown);
+    
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+  }
+
+  // Setup on initial load
+  setupMobileMenu();
+
+  // Setup on Astro view transitions (if used in the future)
+  document.addEventListener('astro:page-load', setupMobileMenu);
+</script>

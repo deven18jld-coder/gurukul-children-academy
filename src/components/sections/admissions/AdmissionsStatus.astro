@@ -1,0 +1,83 @@
+---
+import Container from '../../ui/Container.astro';
+
+interface Props {
+  status: 'open' | 'closing_soon' | 'closed';
+  academicYear: string;
+  message?: string;
+}
+
+const { 
+  status, 
+  academicYear,
+  message 
+} = Astro.props;
+
+let bgClass = '';
+let iconClass = '';
+let title = '';
+let defaultMessage = '';
+
+switch (status) {
+  case 'open':
+    bgClass = 'bg-soft-bg border-primary/10';
+    iconClass = 'text-primary bg-white';
+    title = 'Admissions are Open';
+    defaultMessage = `We are currently accepting applications for the ${academicYear} academic year across all grades.`;
+    break;
+  case 'closing_soon':
+    bgClass = 'bg-[#FFF9E6] border-accent/30';
+    iconClass = 'text-accent bg-white';
+    title = 'Admissions Closing Soon';
+    defaultMessage = `Limited seats available for the ${academicYear} academic year. Apply now to secure your child's spot.`;
+    break;
+  case 'closed':
+    bgClass = 'bg-gray-50 border-gray-200';
+    iconClass = 'text-gray-500 bg-white';
+    title = 'Admissions Closed';
+    defaultMessage = `We are no longer accepting applications for the ${academicYear} academic year. Join our waitlist for the next cycle.`;
+    break;
+}
+
+const displayMessage = message || defaultMessage;
+---
+
+<section class="py-8 relative -mt-8 z-20">
+  <Container>
+    <div class={`rounded-2xl p-6 md:p-8 border shadow-lg flex flex-col sm:flex-row items-center sm:items-start gap-6 max-w-4xl mx-auto transform transition-transform hover:-translate-y-1 duration-300 ${bgClass}`}>
+      
+      <div class={`w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0 shadow-sm ${iconClass}`}>
+        {status === 'open' && (
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        )}
+        {status === 'closing_soon' && (
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        )}
+        {status === 'closed' && (
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        )}
+      </div>
+      
+      <div class="text-center sm:text-left flex-grow">
+        <div class="inline-block px-2 py-1 bg-white/50 rounded text-xs font-bold uppercase tracking-wider mb-2">
+          {academicYear} Session
+        </div>
+        <h2 class="text-2xl font-nunito font-bold text-gray-900 mb-2">
+          {title}
+        </h2>
+        <p class="text-gray-700 font-medium">
+          {displayMessage}
+        </p>
+      </div>
+      
+      {status !== 'closed' && (
+        <div class="mt-4 sm:mt-0 flex-shrink-0 sm:self-center">
+          <a href="#admissions-form" class="inline-flex items-center justify-center bg-primary text-white px-6 py-3 rounded-xl font-bold hover:bg-primary/90 transition-colors duration-300 shadow-md">
+            Apply Now
+          </a>
+        </div>
+      )}
+      
+    </div>
+  </Container>
+</section>

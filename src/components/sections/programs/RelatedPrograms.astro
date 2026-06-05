@@ -1,0 +1,51 @@
+---
+import Container from '../../ui/Container.astro';
+import { type Program } from '../../../data/programs';
+
+interface Props {
+  previous?: Program;
+  next?: Program;
+}
+
+const { previous, next } = Astro.props;
+
+if (!previous && !next) {
+  return null;
+}
+---
+
+<section class="py-16 bg-background border-t border-primary/5">
+  <Container>
+    <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+      
+      {previous ? (
+        <a href={`/programs/${previous.slug}`} class="w-full md:w-[45%] flex items-center p-6 bg-white rounded-2xl border border-primary/5 hover:shadow-md hover:border-secondary/30 transition-all group">
+          <div class="w-10 h-10 rounded-full bg-soft-bg flex items-center justify-center text-primary group-hover:-translate-x-1 transition-transform mr-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+          </div>
+          <div>
+            <div class="text-xs text-text/50 font-bold uppercase tracking-wider mb-1">Previous Stage</div>
+            <div class="text-lg font-nunito font-bold text-primary group-hover:text-secondary transition-colors">{previous.name}</div>
+          </div>
+        </a>
+      ) : (
+        <div class="hidden md:block w-[45%]"></div>
+      )}
+      
+      {next ? (
+        <a href={`/programs/${next.slug}`} class="w-full md:w-[45%] flex items-center justify-end p-6 bg-white rounded-2xl border border-primary/5 hover:shadow-md hover:border-secondary/30 transition-all group text-right">
+          <div>
+            <div class="text-xs text-text/50 font-bold uppercase tracking-wider mb-1">Next Stage</div>
+            <div class="text-lg font-nunito font-bold text-primary group-hover:text-secondary transition-colors">{next.name}</div>
+          </div>
+          <div class="w-10 h-10 rounded-full bg-soft-bg flex items-center justify-center text-primary group-hover:translate-x-1 transition-transform ml-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+          </div>
+        </a>
+      ) : (
+        <div class="hidden md:block w-[45%]"></div>
+      )}
+      
+    </div>
+  </Container>
+</section>

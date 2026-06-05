@@ -1,0 +1,52 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import ProgramHero from '../../components/sections/programs/ProgramHero.astro';
+import AgeGroupOverview from '../../components/sections/programs/AgeGroupOverview.astro';
+import LearningOutcomes from '../../components/sections/programs/LearningOutcomes.astro';
+import DailyRoutine from '../../components/sections/programs/DailyRoutine.astro';
+import SubjectsActivities from '../../components/sections/programs/SubjectsActivities.astro';
+import WhyChooseProgram from '../../components/sections/programs/WhyChooseProgram.astro';
+import RelatedPrograms from '../../components/sections/programs/RelatedPrograms.astro';
+import AdmissionsCTA from '../../components/sections/AdmissionsCTA.astro';
+
+import { programs, getRelatedPrograms } from '../../data/programs';
+
+export function getStaticPaths() {
+  return programs.map(program => ({
+    params: { slug: program.slug },
+    props: { program },
+  }));
+}
+
+const { program } = Astro.props;
+const { previous, next } = getRelatedPrograms(program.slug);
+---
+
+<PageLayout 
+  title={`${program.name} Program - Kiddies Academy`} 
+  description={program.shortDescription}
+>
+  <ProgramHero 
+    name={program.name}
+    ageRange={program.ageRange}
+    shortDescription={program.shortDescription}
+    themeColor={program.themeColor}
+  />
+  
+  <AgeGroupOverview overview={program.overview} />
+  
+  <LearningOutcomes outcomes={program.outcomes} themeColor={program.themeColor} />
+  
+  <DailyRoutine routine={program.dailyRoutine} themeColor={program.themeColor} />
+  
+  <SubjectsActivities subjects={program.subjects} />
+  
+  <WhyChooseProgram text={program.whyChooseText} />
+  
+  <RelatedPrograms previous={previous} next={next} />
+  
+  <AdmissionsCTA 
+    title="Secure Your Child's Future Today"
+    subtitle={`Enrollment for the ${program.name} program is currently open. Spaces are limited to maintain our high teaching standards.`}
+  />
+</PageLayout>
