@@ -1,5 +1,10 @@
 ---
 import Container from '../../ui/Container.astro';
+import imageManifest from '../../../generated/image-manifest.json';
+
+const manifest = imageManifest as Record<string, any>;
+const heroAdmissionsImages = manifest?.hero?.admissions?._files || [];
+const autoImage = heroAdmissionsImages.length > 0 ? heroAdmissionsImages[0].src : undefined;
 
 interface Props {
   title?: string;
@@ -10,6 +15,8 @@ const {
   title = "Join the Gurukul Children Academy Family", 
   subtitle = "We are thrilled that you are considering Gurukul Children Academy for your child's educational journey. Discover our simple, transparent admissions process."
 } = Astro.props;
+
+const finalImage = autoImage;
 ---
 
 <section class="py-20 md:py-32 bg-primary relative overflow-hidden text-white">
@@ -30,9 +37,15 @@ const {
         {title}
       </h1>
       
-      <p class="text-lg md:text-xl text-white/80 max-w-2xl font-medium leading-relaxed">
+      <p class="text-lg md:text-xl text-white/80 max-w-2xl font-medium leading-relaxed mb-12">
         {subtitle}
       </p>
+
+      {finalImage && (
+        <div class="w-full max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-2xl border-4 border-white/20 mt-8 relative z-20">
+          <img src={finalImage} alt="Admissions" class="w-full h-auto max-h-[600px] object-cover" />
+        </div>
+      )}
     </div>
   </Container>
 </section>

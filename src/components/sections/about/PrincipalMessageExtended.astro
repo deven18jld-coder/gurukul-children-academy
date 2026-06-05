@@ -20,7 +20,8 @@ const {
 
 // Type helper for the manifest
 const manifest = imageManifest as Record<string, any>;
-const imagePath = imageKey ? manifest[imageKey] : undefined;
+const principalImages = manifest?.principal?._files || [];
+const imagePath = principalImages.length > 0 ? principalImages[0] : undefined;
 ---
 
 <section class="py-20 md:py-32 bg-white relative border-t border-primary/5">

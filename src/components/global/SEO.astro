@@ -1,4 +1,13 @@
 ---
+import imageManifest from '../../generated/image-manifest.json';
+
+const manifest = imageManifest as Record<string, any>;
+const logoFiles = manifest?.logo?._files || [];
+const logoSrc = logoFiles.length > 0 ? logoFiles[0].src : undefined;
+
+const ogFiles = manifest?.og?._files || [];
+const autoOgSrc = ogFiles.length > 0 ? ogFiles[0].src : undefined;
+
 interface Props {
   title: string;
   description?: string;
@@ -7,11 +16,13 @@ interface Props {
   schema?: any;
 }
 
+const defaultOgUrl = autoOgSrc ? new URL(autoOgSrc, Astro.url).href : (logoSrc ? new URL(logoSrc, Astro.url).href : new URL('/images/og/default-og.jpg', Astro.url).href);
+
 const { 
   title, 
   description = "Gurukul Children Academy - Where Every Child's Story Begins. Nurturing bright futures with a holistic and playful approach to learning.", 
   canonical = Astro.url.href, 
-  ogImage = new URL('/images/og/default-og.jpg', Astro.url),
+  ogImage = defaultOgUrl,
   schema
 } = Astro.props;
 ---

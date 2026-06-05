@@ -1,5 +1,10 @@
 ---
 import Container from '../ui/Container.astro';
+import imageManifest from '../../generated/image-manifest.json';
+
+const manifest = imageManifest as Record<string, any>;
+const logoFiles = manifest?.logo?._files || [];
+const logoSrc = logoFiles.length > 0 ? logoFiles[0].src : undefined;
 
 const year = new Date().getFullYear();
 ---
@@ -8,9 +13,15 @@ const year = new Date().getFullYear();
   <Container>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
       <div>
-        <div class="flex items-center space-x-2 mb-4">
-          <div class="w-8 h-8 rounded bg-secondary flex items-center justify-center text-white font-bold">G</div>
-          <span class="text-xl font-nunito font-bold">Gurukul Children Academy</span>
+        <div class="flex items-center space-x-2 mb-4 bg-white/5 p-2 rounded-xl inline-flex">
+          {logoSrc ? (
+            <img src={logoSrc} alt="School Logo" class="h-10 w-auto" />
+          ) : (
+            <>
+              <div class="w-8 h-8 rounded bg-secondary flex items-center justify-center text-white font-bold">G</div>
+              <span class="text-xl font-nunito font-bold">Gurukul Children Academy</span>
+            </>
+          )}
         </div>
         <p class="text-gray-300 text-sm max-w-sm">
           Where Every Child's Story Begins. Nurturing bright futures with a holistic and playful approach to learning.

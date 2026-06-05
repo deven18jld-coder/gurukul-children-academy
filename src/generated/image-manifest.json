@@ -1,29 +1,262 @@
 {
   "facilities": {
-    "activity-room": [],
-    "classrooms": [],
-    "library": [],
-    "playground": [],
-    "safety": [],
-    "transport": []
+    "activity-room": {
+      "_files": []
+    },
+    "classrooms": {
+      "_files": []
+    },
+    "library": {
+      "_files": []
+    },
+    "playground": {
+      "_files": []
+    },
+    "safety": {
+      "_files": []
+    },
+    "transport": {
+      "_files": []
+    }
   },
   "gallery": {
-    "activities": [],
-    "campus-life": [],
-    "celebrations": [],
-    "events": [],
-    "sports": []
+    "activities": {
+      "_files": [
+        {
+          "src": "/images/gallery/activities/30262163_1390588927709796_1077309752117035008_n.jpg",
+          "name": "30262163_1390588927709796_1077309752117035008_n",
+          "alt": "30262163 1390588927709796 1077309752117035008 n",
+          "caption": "",
+          "ext": ".jpg"
+        },
+        {
+          "src": "/images/gallery/activities/30657172_1395637377204951_6332878185021046784_n.jpg",
+          "name": "30657172_1395637377204951_6332878185021046784_n",
+          "alt": "30657172 1395637377204951 6332878185021046784 n",
+          "caption": "",
+          "ext": ".jpg"
+        },
+        {
+          "src": "/images/gallery/activities/30688834_1395637293871626_5769658009437339648_n.jpg",
+          "name": "30688834_1395637293871626_5769658009437339648_n",
+          "alt": "30688834 1395637293871626 5769658009437339648 n",
+          "caption": "",
+          "ext": ".jpg"
+        },
+        {
+          "src": "/images/gallery/activities/30715925_1395637477204941_5511008155384938496_n.jpg",
+          "name": "30715925_1395637477204941_5511008155384938496_n",
+          "alt": "30715925 1395637477204941 5511008155384938496 n",
+          "caption": "",
+          "ext": ".jpg"
+        }
+      ]
+    },
+    "campus-life": {
+      "_files": [
+        {
+          "src": "/images/gallery/campus-life/01-image.jpg",
+          "name": "01-image",
+          "alt": "01 image",
+          "caption": "",
+          "ext": ".jpg"
+        },
+        {
+          "src": "/images/gallery/campus-life/02-image.jpg",
+          "name": "02-image",
+          "alt": "02 image",
+          "caption": "",
+          "ext": ".jpg"
+        },
+        {
+          "src": "/images/gallery/campus-life/30264857_1390588874376468_5279833778355699712_n.jpg",
+          "name": "30264857_1390588874376468_5279833778355699712_n",
+          "alt": "30264857 1390588874376468 5279833778355699712 n",
+          "caption": "",
+          "ext": ".jpg"
+        },
+        {
+          "src": "/images/gallery/campus-life/508405116_9428360713932537_7016264393501681897_n.jpg",
+          "name": "508405116_9428360713932537_7016264393501681897_n",
+          "alt": "508405116 9428360713932537 7016264393501681897 n",
+          "caption": "",
+          "ext": ".jpg"
+        }
+      ]
+    },
+    "celebrations": {
+      "_files": [
+        {
+          "src": "/images/gallery/celebrations/01-image.jpg",
+          "name": "01-image",
+          "alt": "01 image",
+          "caption": "",
+          "ext": ".jpg"
+        },
+        {
+          "src": "/images/gallery/celebrations/40006383_1554975084604512_5014555466915643392_n.jpg",
+          "name": "40006383_1554975084604512_5014555466915643392_n",
+          "alt": "40006383 1554975084604512 5014555466915643392 n",
+          "caption": "",
+          "ext": ".jpg"
+        },
+        {
+          "src": "/images/gallery/celebrations/40020452_1554975314604489_3366302114274869248_n.jpg",
+          "name": "40020452_1554975314604489_3366302114274869248_n",
+          "alt": "40020452 1554975314604489 3366302114274869248 n",
+          "caption": "",
+          "ext": ".jpg"
+        },
+        {
+          "src": "/images/gallery/celebrations/40049150_1554975044604516_2884764386935701504_n.jpg",
+          "name": "40049150_1554975044604516_2884764386935701504_n",
+          "alt": "40049150 1554975044604516 2884764386935701504 n",
+          "caption": "",
+          "ext": ".jpg"
+        }
+      ]
+    },
+    "events": {
+      "_files": [
+        {
+          "src": "/images/gallery/events/01-image.jpg",
+          "name": "01-image",
+          "alt": "01 image",
+          "caption": "",
+          "ext": ".jpg"
+        },
+        {
+          "src": "/images/gallery/events/02-image.jpg",
+          "name": "02-image",
+          "alt": "02 image",
+          "caption": "",
+          "ext": ".jpg"
+        },
+        {
+          "src": "/images/gallery/events/03-image.jpg",
+          "name": "03-image",
+          "alt": "03 image",
+          "caption": "",
+          "ext": ".jpg"
+        },
+        {
+          "src": "/images/gallery/events/04-image.jpg",
+          "name": "04-image",
+          "alt": "04 image",
+          "caption": "",
+          "ext": ".jpg"
+        }
+      ]
+    },
+    "sports": {
+      "_files": [
+        {
+          "src": "/images/gallery/sports/01-image.jpg",
+          "name": "01-image",
+          "alt": "01 image",
+          "caption": "",
+          "ext": ".jpg"
+        },
+        {
+          "src": "/images/gallery/sports/02-image.jpg",
+          "name": "02-image",
+          "alt": "02 image",
+          "caption": "",
+          "ext": ".jpg"
+        },
+        {
+          "src": "/images/gallery/sports/04-image.jpg",
+          "name": "04-image",
+          "alt": "04 image",
+          "caption": "",
+          "ext": ".jpg"
+        },
+        {
+          "src": "/images/gallery/sports/05-image.jpg",
+          "name": "05-image",
+          "alt": "05 image",
+          "caption": "",
+          "ext": ".jpg"
+        }
+      ]
+    }
   },
   "hero": {
-    "about": [],
-    "admissions": [],
-    "contact": [],
-    "facilities": [],
-    "gallery": [],
-    "home": []
+    "about": {
+      "_files": []
+    },
+    "admissions": {
+      "_files": []
+    },
+    "contact": {
+      "_files": []
+    },
+    "facilities": {
+      "_files": [
+        {
+          "src": "/images/hero/facilities/02-image.jpg",
+          "name": "02-image",
+          "alt": "02 image",
+          "caption": "",
+          "ext": ".jpg"
+        }
+      ]
+    },
+    "gallery": {
+      "_files": [
+        {
+          "src": "/images/hero/gallery/01-image.jpg",
+          "name": "01-image",
+          "alt": "01 image",
+          "caption": "",
+          "ext": ".jpg"
+        }
+      ]
+    },
+    "home": {
+      "_files": [
+        {
+          "src": "/images/hero/home/01-image.jpg",
+          "name": "01-image",
+          "alt": "01 image",
+          "caption": "",
+          "ext": ".jpg"
+        },
+        {
+          "src": "/images/hero/home/03-image.jpg",
+          "name": "03-image",
+          "alt": "03 image",
+          "caption": "",
+          "ext": ".jpg"
+        },
+        {
+          "src": "/images/hero/home/hero.jpg",
+          "name": "hero",
+          "alt": "Hero",
+          "caption": "",
+          "ext": ".jpg"
+        }
+      ]
+    }
   },
-  "logo": [],
-  "og": [],
-  "principal": [],
-  "teachers": []
+  "logo": {
+    "_files": []
+  },
+  "og": {
+    "_files": [
+      {
+        "src": "/images/og/og-image.jpg",
+        "name": "og-image",
+        "alt": "Og image",
+        "caption": "",
+        "ext": ".jpg"
+      }
+    ]
+  },
+  "principal": {
+    "_files": []
+  },
+  "teachers": {
+    "_files": []
+  }
 }

@@ -1,15 +1,24 @@
 ---
 import Container from '../../ui/Container.astro';
+import imageManifest from '../../../generated/image-manifest.json';
+
+const manifest = imageManifest as Record<string, any>;
+const heroFacilitiesImages = manifest?.hero?.facilities?._files || [];
+const autoImage = heroFacilitiesImages.length > 0 ? heroFacilitiesImages[0].src : undefined;
 
 interface Props {
   title?: string;
   subtitle?: string;
+  imageKey?: string;
 }
 
 const { 
   title = "World-Class Facilities", 
-  subtitle = "Our campus is purposefully designed to inspire curiosity, ensure safety, and provide the perfect environment for holistic development."
+  subtitle = "Our campus is designed to provide a safe, stimulating, and resource-rich environment where every child can discover their passions and reach their full potential.",
+  imageKey
 } = Astro.props;
+
+const finalImage = autoImage;
 ---
 
 <section class="py-20 md:py-32 bg-soft-bg relative overflow-hidden">
@@ -29,9 +38,15 @@ const {
         {title}
       </h1>
       
-      <p class="text-lg md:text-xl text-text/80 max-w-2xl font-medium leading-relaxed">
+      <p class="text-lg md:text-xl text-text/80 max-w-2xl font-medium leading-relaxed mb-12">
         {subtitle}
       </p>
+
+      {finalImage && (
+        <div class="w-full max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-2xl border-4 border-white mt-8 relative z-20">
+          <img src={finalImage} alt="Facilities" class="w-full h-auto max-h-[600px] object-cover" />
+        </div>
+      )}
     </div>
   </Container>
 </section>

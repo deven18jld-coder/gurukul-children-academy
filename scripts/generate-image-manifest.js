@@ -92,11 +92,7 @@ function buildManifest(dir) {
   }
   
   if (images.length > 0 || directories.length === 0) {
-    if (Object.keys(result).length === 0) {
-      return images;
-    } else {
-      result['_files'] = images;
-    }
+    result['_files'] = images;
   }
   
   return result;
