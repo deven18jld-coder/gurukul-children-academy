@@ -1,6 +1,7 @@
 ---
 import Container from '../ui/Container.astro';
 import imageManifest from '../../generated/image-manifest.json';
+import AnnouncementBar from './AnnouncementBar.astro';
 
 const manifest = imageManifest as Record<string, any>;
 const logoFiles = manifest?.logo?._files || [];
@@ -24,8 +25,9 @@ function isActive(path: string) {
 }
 ---
 
-<header class="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm relative">
-  <Container class="flex items-center justify-between h-16 md:h-20">
+<header class="sticky top-0 z-50 bg-white shadow-sm flex flex-col border-b border-gray-100 relative">
+  <AnnouncementBar />
+  <Container class="flex items-center justify-between h-16 md:h-20 w-full relative z-10 bg-white">
     <a href="/" class="flex items-center space-x-2 group">
       {logoSrc ? (
         <img src={logoSrc} alt="School Logo" class="h-10 w-auto" />

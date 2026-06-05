@@ -1,0 +1,147 @@
+---
+import { announcementData } from '../../data/announcement';
+import { contactData } from '../../data/contact';
+
+const {
+  showAnnouncement,
+  sessionYear,
+  status,
+  seatsMessage,
+  classesMessage,
+  link,
+  buttonText
+} = announcementData;
+
+if (!showAnnouncement) return null;
+
+const phone = contactData.phone.display;
+---
+
+<div class="announcement-bar bg-[#FFD54A] text-[#0A192F] relative z-[60] flex items-center justify-center overflow-hidden border-b border-[#E6C042]">
+  
+  {/* Marquee Container */}
+  <div class="marquee-container flex flex-1 items-center overflow-hidden relative">
+    <div class="marquee-content flex items-center whitespace-nowrap animate-marquee">
+      {/* Group 1 */}
+      <div class="flex items-center space-x-4 md:space-x-6 px-4 md:px-6 font-medium text-[13px] md:text-[15px]">
+        <span class="flex items-center gap-1.5"><span class="text-lg md:text-xl">🎓</span> <span class="font-bold tracking-wide">{status} for Session {sessionYear}</span></span>
+        <span class="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-[#0A192F]/40"></span>
+        <span>{seatsMessage}</span>
+        <span class="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-[#0A192F]/40"></span>
+        <span>{classesMessage}</span>
+        <span class="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-[#0A192F]/40"></span>
+        <span class="font-bold">Contact: {phone}</span>
+        
+        {/* Mobile-only compact CTA link inside the marquee */}
+        <a href={link} class="md:hidden inline-flex bg-[#0A192F] text-[#FFD54A] px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ml-2">
+          {buttonText}
+        </a>
+      </div>
+      
+      {/* Group 2 (Duplicate for infinite scroll) */}
+      <div class="flex items-center space-x-4 md:space-x-6 px-4 md:px-6 font-medium text-[13px] md:text-[15px]" aria-hidden="true">
+        <span class="flex items-center gap-1.5"><span class="text-lg md:text-xl">🎓</span> <span class="font-bold tracking-wide">{status} for Session {sessionYear}</span></span>
+        <span class="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-[#0A192F]/40"></span>
+        <span>{seatsMessage}</span>
+        <span class="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-[#0A192F]/40"></span>
+        <span>{classesMessage}</span>
+        <span class="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-[#0A192F]/40"></span>
+        <span class="font-bold">Contact: {phone}</span>
+        
+        <a href={link} class="md:hidden inline-flex bg-[#0A192F] text-[#FFD54A] px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ml-2" tabindex="-1">
+          {buttonText}
+        </a>
+      </div>
+
+      {/* Group 3 (Ensure it fills ultra-wide screens) */}
+      <div class="flex items-center space-x-4 md:space-x-6 px-4 md:px-6 font-medium text-[13px] md:text-[15px]" aria-hidden="true">
+        <span class="flex items-center gap-1.5"><span class="text-lg md:text-xl">🎓</span> <span class="font-bold tracking-wide">{status} for Session {sessionYear}</span></span>
+        <span class="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-[#0A192F]/40"></span>
+        <span>{seatsMessage}</span>
+        <span class="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-[#0A192F]/40"></span>
+        <span>{classesMessage}</span>
+        <span class="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-[#0A192F]/40"></span>
+        <span class="font-bold">Contact: {phone}</span>
+        
+        <a href={link} class="md:hidden inline-flex bg-[#0A192F] text-[#FFD54A] px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ml-2" tabindex="-1">
+          {buttonText}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  {/* CTA Button - Desktop Right Aligned, Static */}
+  <div class="hidden md:flex items-center justify-center px-6 bg-[#FFD54A] border-l border-[#0A192F]/10 z-10 h-full shadow-[-12px_0_15px_-5px_rgba(255,213,74,1)] relative flex-shrink-0">
+    <a href={link} class="bg-[#0A192F] text-[#FFD54A] px-5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider hover:bg-[#112240] hover:scale-105 transition-transform duration-300 shadow-sm whitespace-nowrap inline-flex items-center gap-1.5">
+      {buttonText}
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
+  </div>
+</div>
+
+<style>
+  .announcement-bar {
+    height: 40px; /* Mobile height */
+  }
+
+  @media (min-width: 768px) {
+    .announcement-bar {
+      height: 46px; /* Desktop height */
+    }
+  }
+
+  .marquee-container {
+    mask-image: linear-gradient(to right, transparent, black 2%, black 98%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 2%, black 98%, transparent);
+  }
+
+  .animate-marquee {
+    animation: marquee 35s linear infinite;
+  }
+
+  /* Pause on hover for desktop */
+  @media (hover: hover) {
+    .marquee-container:hover .animate-marquee {
+      animation-play-state: paused;
+    }
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-33.333333%);
+    }
+  }
+
+  /* Accessibility: Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-marquee {
+      animation: none;
+      white-space: normal;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .marquee-container {
+      mask-image: none;
+      -webkit-mask-image: none;
+    }
+    /* Hide duplicate groups if animation is off */
+    .animate-marquee > div[aria-hidden="true"] {
+      display: none;
+    }
+    .announcement-bar {
+      height: auto;
+      min-height: 40px;
+      padding: 8px 0;
+    }
+    .animate-marquee > div {
+      text-align: center;
+      line-height: 1.8;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+</style>
